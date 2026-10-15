@@ -1,338 +1,132 @@
-# The Instagram agent skill
+# Instagram Agent Skill (Türkçe Sürüm & Web Stüdyosu)
 
-Thirteen Claude skills that run an Instagram account. Free, MIT, no signup, no
-API key, nothing to connect.
+Bir Instagram hesabını sıfırdan zirveye yönetmek için tasarlanmış **13 yapay zeka yeteneği (skill)**, bilgisayarınızda çalışan **5 yerel analiz motoru** ve tarayıcıdan anında kullanılabilen **GitHub Pages Web Stüdyosu**.
 
-One of them writes your Reels off 26 hook formulas and scores the hook before
-you waste a take on it. One goes and finds the reels that are actually working
-in your niche and ranks them by how far each beat its own account. One writes
-the caption and shows you exactly what the feed shows before the "... more".
-One scores your profile out of 100 and rewrites what lost points. One plans the
-week.
+Tamamen ücretsiz, MIT lisanslı, kayıt gerektirmez, API anahtarı istemez, Instagram şifresi talep etmez.
 
-And one is the humanizer, which is the reason the rest are usable. It strips
-the em dashes, the slop vocabulary and the invisible watermark characters out
-of a draft, then scores what is left against a five-check panel before you ever
-see it.
+> Bu proje, [Jake Schincariol](https://github.com/Jakeschincariol/instagram-agent-skill) tarafından geliştirilen açık kaynaklı projenin **kapsamlı Türkçe yerelleştirmesi, Türkçe konuşma diline uyarlanmış kanca formülleri ve çoklu hesap destekli Web Arayüzü** eklenmiş halidir.
 
-**Nothing gets posted until you say yes.** These skills write. You post.
+---
 
-## Install
+### 🌐 Canlı Web Stüdyosu (Hemen Kullanın)
+Kurulum yapmadan, doğrudan tarayıcınızdan kanca puanlamak, açıklama denetlemek ve 26 kanca formülünü incelemek için:  
+👉 **[https://asklepios0.github.io/instagram-agent-skill/](https://asklepios0.github.io/instagram-agent-skill/)**
 
-Paste this into Claude:
+---
 
-```
-https://github.com/Jakeschincariol/instagram-agent-skill
+## 🎯 Temel Felsefe: "Siz Evet Demeden Hiçbir Şey Paylaşılmaz"
 
-Install this skill, then confirm /ig-reel works.
-```
+Bu araç bir otomatik paylaşım botu **değildir**. Instagram'ın resmi İçerik Yayınlama API'si dışındaki tüm botlar ve otomatik giriş yazılımları Instagram Kullanım Koşulları'nı ihlal eder ve hesabınızın kısıtlanmasına (shadowban / action-block) sebep olur.
 
-Or do it yourself, in Claude Code:
+Bu yüzden sistem şöyle çalışır: **Yapay zeka yazar, puanlar, kurgular ve zamanlar; siz onaylar ve kendi elinizle paylaşırsınız.** Sıfır ban riski, maksimum içerik kalitesi.
 
+---
+
+## 📦 13 Temel Yetenek (Komutlar)
+
+| Komut | Ne İşe Yarar? |
+| :--- | :--- |
+| **`/ig-reel`** | Aklınızdaki ham bir fikri tam bir Reel senaryosuna dönüştürür. 26 formülden 3 alternatif kanca çıkarır, bunları puanlar, ekranda çıkacak yazıları ve saniyesine kadar zamanlanmış çekim planını (beat sheet) hazırlar. |
+| **`/ig-viral`** | Sektörünüzde gerçekten çalışan videoları bulur; ham izlenmeye göre değil, hesabın kendi ortalama izlenmesine kıyasla **kaç kat patladığına (outlier multiple)** göre sıralar. |
+| **`/ig-caption`** | Gönderi açıklaması yazar ve denetler. Akışta "...daha fazla" butonundan önce görünen **ilk 125 karakteri** optimize eder. Güncel 5 hashtag kuralını uygular. |
+| **`/ig-carousel`** | Kaydırmalı gönderi kurgular. Kaydırmayı tetikleyen kapak, slayt metinleri ve 1080x1350 formatına uygun görsel kurgular üretir. |
+| **`/ig-story`** | Günlük hikaye serileri, hangi etkileşim çıkartmasının (anket, soru vb.) ne zaman kullanılacağı ve takipçiyi DM'e çeken huniler tasarlar. |
+| **`/ig-profile`** | Profilinizi (biyografi, isim alanı, link, öne çıkanlar) 12 kriterli bir rubrikle 100 üzerinden puanlar ve puan kaybettiren kısımları düzeltir. |
+| **`/ig-plan`** | Haftalık içerik takvimini, paylaşım formatlarını, zamanlamayı ve günlük etkileşime girilecek 10 hedef hesabı belirler. |
+| **`/ig-human`** | Metindeki yapay zeka kokusunu, *"dijital dünyada", "çığır açan", "unutmayın ki"* gibi klişeleri, uzun tireleri ve kopyalama filigranlarını temizler. |
+| **`/ig-comment`** | Başka hesapların gönderilerine atılacak 9 farklı kategoride dikkat çekici yorum üretir. Asla "🔥🔥🔥" veya boş spam yapmaz. |
+| **`/ig-reply`** | Kendi gönderinizin altındaki yorumları ayıklar (müşteri adayı, soru, gürültü vb.) ve öncelik sırasına göre yanıtlar hazırlar. |
+| **`/ig-dm`** | Yorumdan gelen anahtar kelime teslimatını, ilk mesajı, iş birliği teklifini ve en fazla 2 aşamalı takip (follow-up) mesajlarını yazar. |
+| **`/ig-repurpose`** | 1 uzun videodan, podcast'ten veya bültenden bir haftalık bağımsız Reels ve Carousel gönderileri türetir. |
+| **`/ig-audit`** | Önceden paylaştığınız içeriklerin otopsisini yapar. İzlenme sayısı yerine erişim başına kaydetme ve paylaşım oranlarıyla analiz eder. |
+
+---
+
+## ⚡ Arka Planda Çalışan 5 Yerel Python Aracı
+
+Hiçbir harici API'ye veya internet bağlantısına ihtiyaç duymaz. Tamamen sizin bilgisayarınızda yerel çalışır:
+
+### 1. Kanca Puanlayıcı (`hookscore.py`)
 ```bash
-git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
-cp -r instagram-agent-skill/skills/ig-* ~/.claude/skills/
+python skills/ig-reel/hookscore.py --hook "18.000 TL tek bir eksik sözleşme maddesinin bana maliyetidir"
 ```
+* Kancanızı 5 temel kritere göre (Uzunluk, Somutluk, Gerilim/Maliyet, Başa Yerleşim ve Hitap) 100 üzerinden puanlar.
+* *"Selam arkadaşlar..."* gibi ölü açılışları veya *"Kaydırmayı durdur"* klişelerini **ÖLÜMCÜL HATA (DEALBREAKER)** olarak anında yakalar.
+* Türkçe para birimlerini (TL, ₺), yazıyla yazılan sayıları ve konuşma dilini tam destekler.
 
-Or as a plugin:
-
-```
-/plugin marketplace add Jakeschincariol/instagram-agent-skill
-/plugin install instagram-agent
-```
-
-Project-local instead of global: copy the same folders into your repo's
-`.claude/skills/`. No Claude Code at all? Paste any single `SKILL.md` at the top
-of a chat and it runs as a mode. You lose the five Python tools, which is most
-of the point of `/ig-reel` and `/ig-human`, but the rest works.
-
-Then spend ten minutes on `templates/voice.md`. Copy it to
-`~/.claude/instagram/voice.md` and fill it in, or send Claude three of your own
-reels and say "write my voice.md from these". Every skill reads that file. It
-matters more here than on other platforms, because you have to say the words
-out loud.
-
-## The thirteen
-
-| command | what it does |
-| --- | --- |
-| `/ig-reel` | One idea into a Reel. Three hooks from [26 formulas](skills/ig-reel/hooks.json), scored, then the script, the on-screen text and a timed beat sheet. |
-| `/ig-viral` | Goes and finds what is working in your niche, ranks it by multiple over each account's own median, names the formula, writes the swipe file. |
-| `/ig-caption` | The caption, linted. Shows you the 125 characters the feed actually shows before the tap. |
-| `/ig-carousel` | Swipe posts. The cover that earns the swipe, slide copy, and the 1080x1350 files. |
-| `/ig-story` | The daily story sequence, which sticker does which job, and the DM funnel that starts with them moving first. |
-| `/ig-profile` | Scores your profile against a [12-part rubric](skills/ig-profile/rubric.json) out of 100, then rewrites in fix-first order. |
-| `/ig-plan` | The week. What to post, which format, when, and the 10 accounts to engage with. |
-| `/ig-human` | The humanizer. Two scripts that actually run. See below. |
-| `/ig-comment` | Comments on other people's posts. Nine types, picked by what the post actually is. Never "🔥🔥🔥". |
-| `/ig-reply` | The thread under your own post. Sorts into keyword / lead / substance / question / support / noise, then writes in that order. |
-| `/ig-dm` | The keyword delivery, the first message, the collab pitch, and the two follow-ups. Two. |
-| `/ig-repurpose` | One video, podcast or newsletter into a week of reels and carousels that each stand alone. |
-| `/ig-audit` | Post-mortem on what you already posted. Ranks by outlier multiple and sends per reach, not views. |
-
-## The five tools that actually run
-
-No dependencies, no network, nothing uploaded. They run on your machine, on
-your text.
-
-### Hooks
-
+### 2. Çekim Zamanlayıcı (`beats.py`)
 ```bash
-python3 hookscore.py hooks.txt              # rank your options
-python3 beats.py script.txt --target 30     # time it before you shoot it
+python skills/ig-reel/beats.py senaryo.txt --target 30
 ```
+* Metni dakikada 165 kelime Türkçe konuşma hızına göre hesaplar.
+* Kancanın 3 saniyeyi aşıp aşmadığını, 4 saniyeden uzun süren durgun/sıkıcı yerleri ve videonun sonunun başına bağlanıp bağlanmadığını (loop video) denetler.
 
-```
-HOOK RANKING
-==============================================================================
-->  85.6 STRONG  Nobody tells you that your first 30 reels are supposed to f...
-        weakest: SPECIFICITY (75)
-    81.4 STRONG  I lost $18,000 because of one missing contract.
-        weakest: ADDRESS (70)
-    54.4 OK      Stop scrolling if you want to grow on Instagram in 2026 🔥
-        weakest: STAKES (70)
-        dealbreaker: Opens with "stop scrolling". Asking for attention proves
-                     you have not earned it.
-     9.6 WEAK    Hey guys, today I wanted to talk about content strategy
-        weakest: FRONTLOAD (0)
-        dealbreaker: Greeting. Nobody came to the feed to be greeted.
-```
-
-`beats.py` estimates how long each line takes to say, stacks them into
-timecodes, and flags the four things that kill a Reel in the edit: a hook that
-runs past three seconds, a beat long enough for the viewer to leave, a run of
-lines with nothing concrete in them, and no loop back to the first line.
-
-```
-BEAT SHEET  ·  73 words  ·  ~26.6s at 165 wpm  ·  target 30.0s
-========================================================================
-  0:00.0   2.9s  HOOK    I lost $18,000 because of one missing contract.
-  0:02.9  14.6s  MID     Here is the exact clause I now put in every single...
-                         ^ 14.6s on one beat
-  0:17.4   2.9s          Section 4. Payment on delivery, not on approval.
-  0:20.4   2.9s          Approval is a feeling. Delivery is a date.
-  0:23.3   3.3s  CTA     That one word change is worth $18,000 to me.
-------------------------------------------------------------------------
-  - Beat 2 runs past 4s. Either split the line or change what is on screen
-    inside it. A static frame is where people leave.
-  - Loops: the last beat repeats "$18,000" from the hook. Second watches are
-    free reach.
-  - 3.5s under target. Either add 9 words or shoot it short. Short is usually
-    right.
-```
-
-### The caption
-
+### 3. Açıklama Denetleyici (`caption.py`)
 ```bash
-python3 caption.py caption.txt --keywords "client contracts,freelance pricing"
+python skills/ig-caption/caption.py aciklama.txt
 ```
+* Kullanıcının akışta göreceği ilk 125 karakterlik pencereyi bir kutu içinde simüle eder.
+* Güncel kurala göre **maksimum 5 hashtag** sınırını denetler (30 hashtag dönemi bitti).
+* Net bir eyleme çağrı (CTA: yoruma yaz, DM at, kaydet) olup olmadığını kontrol eder.
 
-Instagram gives a caption about 125 characters in the feed and hides the rest
-behind a tap. Almost every caption that fails, fails there. So the first thing
-this prints is that window, as a box, the way a scrolling stranger reads it:
-
-```
-  WHAT THE FEED SHOWS
-  +------------------------------------------------------+
-  | I lost $18,000 because of one missing clause in a    |
-  | contract, and the worst part is that I had read the  |
-  | thing twice before I si                              |
-  +-------------------------------------------- ... more +
-
-  PASS  LENGTH            389 / 2200 characters
-  WARN  FIRST LINE        133 characters, so it gets cut at 125 mid-thought
-  PASS  HOOK IS CONCRETE  2 numbers or names in the visible window
-  PASS  HASHTAGS          3 tags: #freelance #contracts #agencyowner
-  PASS  ONE ASK           one call to action: comment a keyword
-  WARN  SEARCH TERMS      1/2 present. Missing: client contracts
-```
-
-It enforces the current hashtag cap, which is **five per post**, not thirty.
-Instagram cut it on 18 December 2025.
-
-### The humanizer
-
+### 4. İnsanlaştırıcı & AI Dedektörü (`humanize.py` & `detect.py`)
 ```bash
-python3 humanize.py draft.txt --report      # clean it, show every change
-python3 detect.py draft.txt                  # score it, five checks
-python3 detect.py before.txt after.txt       # prove the delta
+python skills/ig-human/humanize.py metin.txt --report
 ```
+* Metindeki yapay zeka klişelerini (*"dijital dünyada", "çığır açan", "unutmayın ki", "özetle"* vb.) ve görünmez filigran karakterlerini temizler.
 
-**What comes out automatically:**
-
-- **Invisible characters.** Zero-width spaces and joiners, word joiners, soft
-  hyphens, byte-order marks, Unicode tag characters, invisible separators,
-  non-breaking and narrow spaces. Your keyboard does not make these. They
-  survive copy-paste and they are invisible in every editor you own.
-- **Typography.** Em dash to comma, en dash to hyphen, curly quotes to
-  straight, ellipsis to three dots, and the orphaned punctuation that leaves.
-- **The lexicon.** 154 stock words and phrases with plain-English replacements.
-  The last block of it is Instagram-specific: "stop scrolling", "in today's
-  video", "follow for more", "tag someone who needs this", "the algorithm
-  loves", "run don't walk". It lives in
-  [`slop.json`](skills/ig-human/slop.json) and it is meant to be edited.
-
-**What gets flagged instead of fixed:** "It's not just X, it's Y", rule-of-three
-triads, the video preamble, emoji bullet lists, three shouted words in a row,
-hashtag walls, reflex follow bait, uniform sentence length. Changing the shape
-of a sentence needs judgement, so those come back for a rewrite rather than
-getting mangled by a regex.
-
-Run against a caption written to be as bad as possible:
-
-```
-  BURSTINESS    ###################.....  78.4
-  SPECIFICITY   #############...........  53.6    3.4 concrete markers per 100 words
-  SLOP DENSITY  ........................   0.0    20 stock terms, 23.0 per 100 words
-  FINGERPRINT   ################........  68.7    1 em dash
-  VOICE         #################.......  70.0    9 structural tells
-  ------------------------------------------------------------
-  HUMAN SCORE   ########................  32.5   FLAGGED
-```
-
-After `humanize.py`, with the flagged structures still unrewritten:
-
-```
-  HUMAN SCORE   ###################.....  79.7   PASS    (+47.2)
-```
-
-### The swipe file
-
+### 5. Viral Kıyaslama Aracı (`swipe.py`)
 ```bash
-python3 swipe.py captured.tsv --out ~/.claude/instagram/swipe.md
+python skills/ig-viral/swipe.py captured.tsv
+```
+* Sektördeki videoları hesapların kendi ortalama (medyan) izlenmelerine kıyasla kaç kat patladığına (outlier multiple) göre sıralar ve 26 kanca formülüyle eşleştirir.
+
+---
+
+## 📚 26 Kanıtlanmış Türkçe Kanca Formülü
+
+`skills/ig-reel/hooks_tr.json` dosyasında Türkçe dilbilgisine, devrik ve kurallı cümle yapılarına göre uyarlanmış 26 formül yer alır:
+1. **Maliyet / Hata İtirafı:** *"18.000 TL, sözleşmedeki tek bir eksik cümlenin bana maliyeti."*
+2. **Olumsuz Emir:** *"Her gün video atmayı bırakın. Bunun yerine şunu yapın."*
+3. **Kimse Söylemiyor:** *"Kimse size ilk 30 videonuzun batacağını söylemez."*
+4. **Tasarruf / İkame:** *"Bu 300 TL'lik araç, ayda 25.000 TL ödediğim editörün yerini aldı."*
+5. **Zaman Sıkıştırması:** *"Teklif hazırlamak eskiden 5 saatimi alırdı. Artık 20 dakikamı alıyor."*
+6. **Rakam Masada (Fatura):** *"60 gün boyunca her gün motor sürdüm; işte gerçek servis faturam."*
+... ve diğer 20 formül.
+
+---
+
+## 🎙️ Kendi Ses Tonunuzu Belirleme (`ses_profili.md`)
+
+[`templates/ses_profili.md`](templates/ses_profili.md) dosyasını açıp 5 dakikada doldurun:
+* Kimsiniz ve kime hitap ediyorsunuz?
+* Kamera karşısındaki enerjiniz nasıl? (Hızlı, sakin, esprili, resmi)
+* Hangi kelimeleri sık kullanır, hangilerini asla ağzınıza almazsınız?
+* Sektörünüzde çoğu kişinin savunduğu ama sizin katılmadığınız gerçekler neler?
+
+Bu dosya doldurulduğunda, üretilen tüm senaryolar ve metinler doğrudan **sizin ağzınızdan çıkmış gibi** konuşur.
+
+---
+
+## 💻 Kurulum ve Kullanım
+
+### 1. Claude Code ile Kullanım
+Depoyu klonlayın ve skilleri Claude Code klasörünüze kopyalayın:
+```bash
+git clone https://github.com/Asklepios0/instagram-agent-skill.git
+cp -r instagram-agent-skill/skills/* ~/.claude/skills/
 ```
 
-Raw views are not evidence. A 2,000,000-follower account doing 400,000 views
-had a quiet Tuesday. A 4,000-follower account doing 400,000 views found
-something. `swipe.py` ranks on the multiple over each account's own median,
-names the hook formula, and prints what separates the top third from the
-bottom third.
+### 2. Antigravity / Gemini / Cursor ile Kullanım
+Depoyu projenize ekleyin. Sohbete tek başına **`*`** (yıldız) yazdığınızda 14 maddelik Türkçe komut menüsü açılacaktır.
 
-```
-SWIPE FILE  ·  4 reels  ·  4 accounts  ·  baseline: account median
-==============================================================================
-    60.0x  hook  57  #9  The Steal              @c                 180,000
-           "steal this four line follow up it took me two years"
-    37.5x  hook  86  #3  Nobody Tells You       @a                 412,000
-           "nobody tells you that your first 30 reels are supposed to flop"
-     1.3x  hook  13  -   unclassified           @b               1,200,000
-           "in this video I am going to show you my morning routine"
-```
+### 3. Doğrudan Web Üzerinden Kullanım
+Hiçbir kurulum yapmadan [Canlı Web Arayüzü](https://asklepios0.github.io/instagram-agent-skill/) üzerinden tüm araçları interaktif olarak kullanabilirsiniz.
 
-## What I actually measured, which is the part worth reading
+---
 
-I did not want to publish a hook scorer on the claim that it feels right, so I
-tested it. The corpus is **74 real short-form hooks**: the first three seconds
-of the auto-caption track from the top eight and bottom eight performing shorts
-on each of five channels, view counts from 931 to 550,000.
+## 📜 Lisans & Teşekkür
 
-They are YouTube Shorts rather than Reels, because Instagram does not hand you
-view counts you can collect without logging into somebody's account, and
-scraping it would violate the Terms this repo tells you not to violate. The
-hook grammar is the same and the sourcing is public. That is a real limitation
-and it is stated here rather than buried.
-
-**Three results, two of them uncomfortable:**
-
-**1. It catches bad hooks well.** Against ten hooks written deliberately badly,
-AUC 0.83, and nine of the ten scored below the median of the real corpus. If
-your hook opens on a greeting, a preamble or nothing concrete, this tells you.
-
-**2. It does not pick winners.** Separating a good creator's hits from that
-same creator's misses: **AUC 0.56, where 0.50 is a coin flip.** Of the five
-checks, only SPECIFICITY separated the bands meaningfully, by 60 points of
-median. STAKES and ADDRESS had identical medians in both bands, which means on
-this corpus they measured nothing.
-
-So the honest use is: kill the obviously weak hooks before you shoot them, then
-trust your own retention graph. Nothing that reads text can tell you which of
-two decent hooks will travel, because that is decided by your face, your edit,
-your audio and who Instagram shows it to.
-
-**3. The formula classifier was broken and the test is what caught it.** The
-`match` regexes in `hooks.json` were written off my own templates, and they
-named **8%** of real hooks. People do not speak in templates. Rewriting them
-against actual transcribed speech took it to **49%**, and four formulas went
-into the set because they kept appearing and were not there: Contrarian Flip,
-The Statistic, The Reveal, Someone Else's Result, plus The Superlative. On the
-other 51% it abstains, which is correct: a lot of short-form is podcast clips
-that have no hook formula at all.
-
-One fixed bug worth naming: `SPECIFICITY` only counted digits, so "zero
-dollars" and "three marketing books" scored as having nothing concrete in them.
-Spoken hooks say their numbers out loud.
-
-If you re-run this on a bigger or cleaner corpus and get a different answer, I
-would rather know. The measurement script is not in the repo because it depends
-on `yt-dlp`, but the method is four lines and is written out in
-[`/ig-viral`](skills/ig-viral/SKILL.md).
-
-## The fine print, which is the honest part
-
-**These skills do not post to Instagram.** There is a real Content Publishing
-API for Professional accounts, and it needs a Meta developer app, a linked
-Page, a long-lived token and app review, which is not a thing a skill can hand
-you. Everything else people use to automate posting, commenting, following or
-DMing is browser automation or a third-party tool, and both violate
-[Instagram's Terms of Use](https://help.instagram.com/581066165581870) and get
-accounts action-blocked. So every skill here ends the same way: a copy-ready
-block, and you post it. That is not a limitation bolted on afterwards, it is
-the design, and it is why the approval gate is real rather than a setting.
-
-The one exception is keyword auto-replies in DMs, which Instagram supports
-through its own tools and approved partners, and which only fire after somebody
-comments first. `/ig-dm` says where that line is.
-
-**`/ig-viral` reads, it does not scrape.** Ten accounts, a dozen reels each, at
-human speed, with you driving your own browser. It never asks for your password
-and never logs in as you. Automated collection at volume is the thing that gets
-accounts restricted, and a crawler is not what this is.
-
-**The five detection checks are local heuristics, not detector APIs.** They are
-modelled on the signals public detectors key on and they run entirely on your
-machine. They are not GPTZero, Originality, Copyleaks, Winston or Turnitin,
-they do not call those services, and they cannot promise those verdicts. Fixing
-what they measure tends to move those numbers, because they are measuring the
-same underlying things. That is the whole claim. Nobody can honestly sell you
-"undetectable", and anybody who does is selling you something.
-
-**The invisible-character pass is real and it is narrow.** It removes the
-zero-width and format characters that end up in generated text and survive a
-copy-paste. That is a genuine, checkable fingerprint. It is not a claim about
-defeating a cryptographic watermarking scheme, and this repo does not make one.
-
-**Nothing here fabricates.** No invented metrics, clients or outcomes go under
-your name. If a draft needs a number you have not given, it comes back with
-`{{your number}}` in it and a flag, every time.
-
-**Platform numbers go stale.** The hashtag cap moved from 30 to 5 in December
-2025 while this repo was being written, and the linter had the old number in it
-until the fact got checked. If something here contradicts what Instagram is
-doing when you read it, Instagram is right.
-
-## Files
-
-```
-skills/ig-reel/hooks.json          26 hook formulas: template, example, on-screen line,
-                                   what it is for, how it gets ruined, and a match regex
-skills/ig-reel/hookscore.py        the five-property hook panel
-skills/ig-reel/beats.py            script to timed beat sheet
-skills/ig-caption/caption.py       the truncation preview and the caption linter
-skills/ig-human/slop.json          the lexicon: 154 terms, 18 invisible classes, 16 tells
-skills/ig-human/humanize.py        the three cleaning passes
-skills/ig-human/detect.py          the five-check panel
-skills/ig-viral/swipe.py           outlier ranking and formula classification
-skills/ig-profile/rubric.json      the 100-point profile score
-templates/voice.md                 your voice profile. Fill this in first.
-```
-
-## Credit
-
-Made by Jake Schincariol, [opusjake.ai](https://opusjake.ai).
-
-Sibling repo, same idea for a different platform:
-[linkedin-agent-skill](https://github.com/Jakeschincariol/linkedin-agent-skill).
-
-## License
-
-MIT. Take it, change it, ship it.
+* **Orijinal Proje Sahibi:** Jake Schincariol ([opusjake.ai](https://opusjake.ai) / [Orijinal Repo](https://github.com/Jakeschincariol/instagram-agent-skill))
+* **Türkçe Sürüm & Web UI:** [Asklepios0](https://github.com/Asklepios0)
+* **Lisans:** MIT Lisansı (Özgürce kullanılabilir, geliştirilebilir ve paylaşılabilir).

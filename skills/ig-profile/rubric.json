@@ -1,79 +1,79 @@
 {
   "version": "1.0",
   "total": 100,
-  "note": "Twelve items. Score each honestly - a generous score helps nobody. Most first-pass profiles land in the 30s and 40s. The weighting is deliberate: the name field, the first bio line and the pinned three are worth more than the photo, because they are what a stranger who arrived from one reel actually processes before deciding to follow.",
+  "note": "12 maddelik karara bağlama rubriği. Her maddeyi dürüstçe puanlayın; cömert bir puan kimseye fayda sağlamaz. İlk puanlamada profillerin çoğu 30-45 aralığında kalır. Ağırlıklar bilinçli seçilmiştir: İsim alanı, biyografinin ilk satırı ve sabitlenen 3 gönderi profil fotoğrafından çok daha değerlidir çünkü yabancı bir ziyaretçi takip kararı vermeden önce tam olarak bunları tartar.",
   "items": [
     {
       "id": "name_field",
       "points": 12,
-      "full_marks": "The name field (30 characters, the bold line, not the handle) carries the name plus what they do in words people search: 'Dana Ruiz | Proposal templates'. This field is indexed by Instagram search and most accounts waste it on a name alone.",
-      "common_fail": "Just a name, or a name with an emoji."
+      "full_marks": "İsim alanı (30 karakter, kalın yazılan satır, @kullanıcıadı değil) hem ismi hem de insanların aradığı anahtar kelimeleri taşır: 'Ramazan | Motosiklet İnceleme'. Bu alan Instagram arama motoru tarafından taranır; çoğu hesap bunu sadece kendi ismiyle heba eder.",
+      "common_fail": "Yalnızca isim veya sadece ismin yanına konmuş bir emoji."
     },
     {
       "id": "bio_first_line",
       "points": 12,
-      "full_marks": "Line one names who this is for and what changes for them, in their words. Not a job title, not a list of adjectives, not three emoji separated by bars.",
-      "common_fail": "'Entrepreneur | Coffee lover | Dog dad'."
+      "full_marks": "İlk satır sayfanın kimin için olduğunu ve onlar için neyin değişeceğini net bir dille açıklar. Kuru bir unvan, sıfat dizisi veya aralarına çizgi çekilmiş emojiler olmamalıdır.",
+      "common_fail": "'Girişimci | Kahve aşığı | Gezgin'."
     },
     {
       "id": "bio_body",
       "points": 8,
-      "full_marks": "The rest of the 150 characters carries one piece of proof or one specific offer, and reads as sentences rather than a pipe-separated list.",
-      "common_fail": "Keyword soup, or blank space."
+      "full_marks": "150 karakterlik alanın geri kalanı somut bir kanıt veya net bir teklif taşır; liste yerine anlamlı cümleler şeklinde okunur.",
+      "common_fail": "Anahtar kelime çorbası veya tamamen boş alan."
     },
     {
       "id": "pinned_three",
       "points": 10,
-      "full_marks": "Three posts pinned to the top of the grid, doing three different jobs: the best proof, the clearest explanation of the offer, and the best introduction to the person. Not the three highest-view posts by accident.",
-      "common_fail": "Nothing pinned, so the top of the grid is whatever was posted last."
+      "full_marks": "Izgaranın en üstüne sabitlenmiş 3 gönderi 3 farklı kritik görevi üstlenir: En büyük kanıt/sonuç, teklifin/rehberin en net açıklaması ve üreticinin en iyi tanışma videosu. Tesadüfen en çok izlenen 3 video değil.",
+      "common_fail": "Hiçbir şey sabitlenmemiş; bu yüzden ızgaranın tepesinde en son paylaşılan rastgele içerikler yer alıyor."
     },
     {
       "id": "link",
       "points": 8,
-      "full_marks": "One destination that matches what the bio just promised. Up to five links are allowed; more than two is a menu, and a menu converts worse than a door.",
-      "common_fail": "A link tree with eleven options, or no link at all."
+      "full_marks": "Biyografideki vaatle birebir eşleşen tek bir çıkış hedefi. En fazla 5 linke izin verilir; ancak 2'den fazlası bir menüye dönüşür ve bir menü her zaman tek bir kapıdan daha az dönüşüm sağlar.",
+      "common_fail": "11 farklı seçenek içeren karmaşık bir Linktree veya hiç link olmaması."
     },
     {
       "id": "highlights",
       "points": 8,
-      "full_marks": "Four to six highlights named for the questions a buyer actually asks: Pricing, Results, How it works, About. Covers consistent. Nothing older than a year sitting at the front.",
-      "common_fail": "'Random', 'Life', 'Faves', or 14 highlights in no order."
+      "full_marks": "Müşterinin aklındaki gerçek sorulara göre adlandırılmış 4 ile 6 öne çıkan başlığı: Fiyatlar, Sonuçlar, Nasıl Çalışır, Hakkımda. Kapaklar tutarlı. 1 yıldan eski anlamsız hikayeler önde durmuyor.",
+      "common_fail": "'Rastgele', 'Hayat', 'Anılar' gibi başlıklar veya sırasız 14 öne çıkan."
     },
     {
       "id": "grid_legibility",
       "points": 8,
-      "full_marks": "The first nine covers are legible at thumbnail size and say what the account is about without a single tap. Reel covers are chosen deliberately, not left as frame one.",
-      "common_fail": "Nine covers of a face mid-word with no text."
+      "full_marks": "İlk 9 Reels kapağı küçük resim boyutunda bile rahatça okunabiliyor ve tek bir tıklama gerektirmeden hesabın ne hakkında olduğunu anlatıyor. Kapaklar bilinçli seçilmiş.",
+      "common_fail": "Üzerinde hiçbir yazı olmayan, cümlenin ortasında donmuş 9 yüz kapağı."
     },
     {
       "id": "photo",
       "points": 6,
-      "full_marks": "Face fills roughly 60% of a circle that renders at about 40 pixels. Eyes visible, shot in the last two years, background not competing.",
-      "common_fail": "A full-body shot, a logo for a personal brand, or a photo taken at arm's length in a dark room."
+      "full_marks": "Yüz, yaklaşık 40 piksellik dairenin %60'ını dolduruyor. Gözler net görünüyor, son 2 yılda çekilmiş, arka plan odakla yarışmıyor.",
+      "common_fail": "Boydan çekilmiş uzak bir fotoğraf, kişisel marka için şirket logosu veya karanlık bir selfie."
     },
     {
       "id": "handle",
       "points": 6,
-      "full_marks": "Readable, sayable out loud, and the same handle as the other platforms. No stacked underscores or numbers standing in for letters.",
-      "common_fail": "A handle nobody can spell after hearing it once."
+      "full_marks": "Okunabilir, sesli telaffuzu kolay ve diğer platformlardakiyle uyumlu. Harf yerine sayılar veya art arda alt tireler yok.",
+      "common_fail": "Bir kez duyulduğunda kimsenin doğru yazamayacağı karmaşık bir kullanıcı adı."
     },
     {
       "id": "category_contact",
       "points": 6,
-      "full_marks": "Professional account with a category that matches the offer, and contact buttons that work. Email that is checked, not the one from 2019.",
-      "common_fail": "Personal account, so there are no insights and no contact button."
+      "full_marks": "Teklifle eşleşen bir kategoriye sahip profesyonel hesap ve çalışan iletişim butonları. Düzenli kontrol edilen güncel bir e-posta.",
+      "common_fail": "Kişisel hesap; bu nedenle ne istatistikler var ne de iletişim butonu."
     },
     {
       "id": "recent_activity",
       "points": 10,
-      "full_marks": "Posted in the last seven days and replied to comments on the most recent post. An account that last posted in March reads as closed.",
-      "common_fail": "A five-week gap, or a wall of unanswered comments."
+      "full_marks": "Son 7 gün içinde paylaşım yapılmış ve en son gönderideki yorumlara yanıt verilmiş. En son Mart ayında paylaşım yapmış bir hesap kapalı görünür.",
+      "common_fail": "5 haftalık paylaşım sessizliği veya yanıtsız bırakılmış onlarca yorum."
     },
     {
       "id": "story_presence",
       "points": 6,
-      "full_marks": "A story up right now, or at least most days. It is the difference between a profile and a person.",
-      "common_fail": "No ring, ever."
+      "full_marks": "Şu anda aktif bir hikaye halkası mevcut veya çoğu gün paylaşılıyor. Bir profil ile gerçek bir insan arasındaki fark burasıdır.",
+      "common_fail": "Hikaye halkasının hiçbir zaman yanmaması."
     }
   ]
 }

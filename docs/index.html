@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Agent TR · İçerik, Kanca ve Büyüme Stüdyosu</title>
-  <meta name="description" content="Instagram içerik üreticileri için Türkçe kanca puanlayıcı, 125 karakter akış simülatörü, beat sheet zamanlayıcı ve 26 viral kanca kütüphanesi.">
+  <title>Instagram Agent TR · Profesyonel İçerik & Büyüme Stüdyosu</title>
+  <meta name="description" content="Instagram içerik üreticileri için çoklu hesap yöneticisi, kanca puanlayıcı, 125 karakter akış simülatörü ve 26 kanca kütüphanesi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090a0f;
-      --card-bg: rgba(22, 24, 34, 0.75);
+      --bg: #08090d;
+      --card-bg: rgba(18, 20, 30, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(30, 34, 50, 0.9);
-      --text: #f0f2f8;
-      --text-muted: #8e95ad;
+      --card-hover: rgba(28, 32, 48, 0.85);
+      --text: #f3f5fc;
+      --text-muted: #8b92ab;
       --ig-gradient: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-      --ig-purple: #833ab4;
       --ig-pink: #e1306c;
+      --ig-purple: #833ab4;
       --ig-orange: #fd1d1d;
       --ig-yellow: #fcb045;
       --success: #10b981;
@@ -27,11 +27,7 @@
       --accent: #6366f1;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -41,130 +37,289 @@
       line-height: 1.5;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(131, 58, 180, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(253, 29, 29, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 15% 15%, rgba(131, 58, 180, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(253, 29, 29, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 60%);
     }
 
-    header {
-      padding: 2.5rem 1.5rem 1.5rem;
-      text-align: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .badge {
-      display: inline-flex;
+    /* TOP NAVBAR */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 11, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.8rem 1.5rem;
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      padding: 0.4rem 1rem;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      color: var(--ig-yellow);
-      margin-bottom: 1rem;
-      backdrop-filter: blur(10px);
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--ig-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.8rem;
-      background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%, var(--ig-yellow) 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(225, 48, 108, 0.35);
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 40%, var(--ig-yellow));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 650px;
-      margin: 0 auto 2rem;
-    }
-
-    .attribution-bar {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
-      display: inline-block;
-    }
-    .attribution-bar a {
-      color: var(--ig-pink);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .attribution-bar a:hover {
-      text-decoration: underline;
-    }
-
-    /* Tabs */
-    .tabs-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      max-width: 1000px;
-      margin: 0 auto 2.5rem;
-      padding: 0.4rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 0.75rem 1.25rem;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
+    .top-actions {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
+      gap: 0.75rem;
+    }
+
+    /* Active Account Badge & Switcher */
+    .account-picker-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .account-picker-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(225, 48, 108, 0.4);
+    }
+
+    .account-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--ig-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .account-badge-text {
+      color: var(--ig-yellow);
+      font-weight: 700;
+    }
+
+    /* BACK TO DASHBOARD BAR */
+    .view-header-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 1.5rem auto 1rem;
+      padding: 0 1.5rem;
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
       font-family: inherit;
     }
 
-    .tab-btn:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateX(-2px);
     }
 
-    .tab-btn.active {
-      color: #fff;
-      background: var(--ig-gradient);
-      box-shadow: 0 4px 15px rgba(225, 48, 108, 0.35);
+    .view-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
-    main {
+    /* CONTAINER */
+    .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 1.5rem 4rem;
+      padding: 1.5rem 1.5rem 4rem;
     }
 
-    .tab-pane {
+    /* HERO */
+    .hero-section {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      color: var(--ig-yellow);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #ffffff 40%, #e2e8f0 70%, var(--ig-yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .active-account-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(225, 48, 108, 0.08);
+      border: 1px solid rgba(225, 48, 108, 0.25);
+      padding: 0.6rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      color: #fce7f3;
+      margin-bottom: 2rem;
+    }
+
+    /* DASHBOARD HUB GRID */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .hub-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hub-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(225, 48, 108, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .hub-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--ig-gradient);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .hub-card:hover::before {
+      opacity: 1;
+    }
+
+    .hub-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .hub-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .hub-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .hub-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ig-yellow);
+    }
+
+    .hub-tag {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* SUB-VIEWS (PANELS) */
+    .view-pane {
       display: none;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.25s ease;
     }
 
-    .tab-pane.active {
+    .view-pane.active {
       display: block;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Card styling */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -173,10 +328,6 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       margin-bottom: 2rem;
-    }
-
-    .card-header {
-      margin-bottom: 1.5rem;
     }
 
     .card-title {
@@ -191,6 +342,7 @@
     .card-desc {
       color: var(--text-muted);
       font-size: 0.92rem;
+      margin-bottom: 1.5rem;
     }
 
     .grid-2 {
@@ -200,9 +352,7 @@
     }
 
     @media (max-width: 850px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
+      .grid-2 { grid-template-columns: 1fr; }
     }
 
     label {
@@ -407,17 +557,6 @@
       cursor: pointer;
     }
 
-    .tag-badge {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.08);
-      margin-right: 0.3rem;
-      margin-top: 0.3rem;
-    }
-
     /* Beat sheet display */
     .beat-item {
       display: grid;
@@ -447,13 +586,7 @@
       margin-top: 0.2rem;
     }
 
-    /* 26 Hooks Catalog */
-    .search-bar {
-      margin-bottom: 1.5rem;
-      display: flex;
-      gap: 1rem;
-    }
-
+    /* Hooks Catalog */
     .hook-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -466,7 +599,6 @@
       border-radius: 14px;
       padding: 1.25rem;
       transition: all 0.2s;
-      cursor: pointer;
       position: relative;
     }
 
@@ -526,11 +658,103 @@
       cursor: pointer;
     }
 
-    .copy-btn:hover {
-      background: var(--ig-pink);
+    .copy-btn:hover { background: var(--ig-pink); }
+
+    /* MODAL (Account Manager) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
     }
 
-    /* Toast */
+    .modal-card {
+      background: #11131c;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 560px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .accounts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .account-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .account-item:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(225, 48, 108, 0.3);
+    }
+
+    .account-item.active-item {
+      border-color: var(--ig-pink);
+      background: rgba(225, 48, 108, 0.1);
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-del-account {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .btn-del-account:hover { color: var(--danger); }
+
+    /* TOAST */
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -544,47 +768,174 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
       display: none;
       z-index: 1000;
-      animation: pop 0.3s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="badge">🚀 Instagram Agent Skill · Türkçe Web Stüdyosu</div>
-    <h1>Instagram İçerik & Büyüme Stüdyosu</h1>
-    <p class="subtitle">26 kanıtlanmış kanca formülü, akış simülatörü, beat sheet zamanlayıcı ve yapay zeka temizleyicisi tek bir pratik arayüzde.</p>
-    <div class="attribution-bar">
-      ✨ Orijinal Açık Kaynak Proje: <a href="https://github.com/Jakeschincariol/instagram-agent-skill" target="_blank">Jake Schincariol (MIT Lisanslı)</a> · Türkçe Sürüm: <strong>Asklepios0</strong>
+  <!-- TOP NAVBAR -->
+  <header class="topbar">
+    <div class="brand-group" onclick="switchView('hub-view')">
+      <div class="brand-logo">IG</div>
+      <div>
+        <div class="brand-title">Instagram Agent TR</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted);">Çoklu Hesap Stüdyosu</div>
+      </div>
     </div>
 
-    <!-- Navigation Tabs -->
-    <nav class="tabs-nav" id="tabsNav">
-      <button class="tab-btn active" data-tab="hook-tab">🎯 Kanca Puanlayıcı</button>
-      <button class="tab-btn" data-tab="caption-tab">📱 Akış & Açıklama (125 Karakter)</button>
-      <button class="tab-btn" data-tab="beats-tab">⏱️ Beat Sheet (Çekim Süresi)</button>
-      <button class="tab-btn" data-tab="library-tab">📚 26 Kanca Şablonu</button>
-      <button class="tab-btn" data-tab="profile-tab">👤 Profil Denetimi (100 Puan)</button>
-      <button class="tab-btn" data-tab="prompt-tab">🤖 AI Prompt Üretici</button>
-    </nav>
+    <div class="top-actions">
+      <!-- Active Account Switcher -->
+      <button class="account-picker-btn" onclick="openAccountModal()">
+        <div class="account-avatar" id="topAvatar">M</div>
+        <span id="topAccountLabel">@motordayim</span>
+        <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <!-- TAB 1: Kanca Puanlayıcı -->
-    <section id="hook-tab" class="tab-pane active">
+  <!-- VIEW HEADER (Visible when inside a module) -->
+  <div class="view-header-bar" id="viewHeaderBar">
+    <button class="btn-back" onclick="switchView('hub-view')">← Ana Panele Dön</button>
+    <div class="view-title-wrap">
+      <span style="font-size: 0.85rem; color: var(--text-muted);">Aktif Çalışma Hesabı:</span>
+      <span class="account-badge-text" id="viewActiveBadge">@motordayim</span>
+    </div>
+  </div>
+
+  <main class="container">
+    
+    <!-- 1. DASHBOARD HUB (ANA SAYFA) -->
+    <section id="hub-view" class="view-pane active">
+      <div class="hero-section">
+        <div class="hero-badge">🚀 13 Skill · 5 Python Motoru · 26 Kanca Şablonu</div>
+        <h1 class="hero-title">İçerik & Büyüme Stüdyosu</h1>
+        <p class="hero-desc">Her gönderiyi şansa bırakmadan; kancasını puanlayarak, akış penceresini test ederek ve konuşma süresini hesaplayarak kurgulayın.</p>
+        
+        <div class="active-account-banner" id="hubAccountBanner">
+          <span>👤 Aktif Profil: <strong id="hubAccountName">@motordayim</strong> (Motosiklet & İnceleme)</span>
+          <button class="btn-secondary" style="padding: 0.25rem 0.6rem; font-size: 0.78rem;" onclick="openAccountModal()">Profili Değiştir</button>
+        </div>
+      </div>
+
+      <!-- ALL MODULES GRID -->
+      <div class="hub-grid">
+        <!-- Module 1: Hook Scorer -->
+        <div class="hub-card" onclick="switchView('hook-view')">
+          <div>
+            <span class="hub-icon">🎯</span>
+            <h3 class="hub-title">Kanca (Hook) Stüdyosu</h3>
+            <p class="hub-desc">Videonun ilk 2 saniyesini 5 kritere göre puanlayın. 'Selam arkadaşlar' ve 'Kaydırmayı durdur' ölümcül hatalarını yakalayın.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Kancayı Test Et →</span>
+            <span class="hub-tag">/ig-reel</span>
+          </div>
+        </div>
+
+        <!-- Module 2: Caption Linter -->
+        <div class="hub-card" onclick="switchView('caption-view')">
+          <div>
+            <span class="hub-icon">📱</span>
+            <h3 class="hub-title">Akış & Açıklama (125 Karakter)</h3>
+            <p class="hub-desc">Gönderi metninizin akışta '...devamı'ndan önce nasıl görüneceğini simüle edin. Güncel 5 hashtag sınırını denetleyin.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Simülatörü Aç →</span>
+            <span class="hub-tag">/ig-caption</span>
+          </div>
+        </div>
+
+        <!-- Module 3: Beat Sheet -->
+        <div class="hub-card" onclick="switchView('beats-view')">
+          <div>
+            <span class="hub-icon">⏱️</span>
+            <h3 class="hub-title">Beat Sheet (Çekim Süresi)</h3>
+            <p class="hub-desc">Reel senaryonuzu dakikada 165 kelime hızına göre saniye saniye zamanlayın. 4 saniyeden uzun durgun sahneleri bulun.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Süreyi Ölç →</span>
+            <span class="hub-tag">beats.py</span>
+          </div>
+        </div>
+
+        <!-- Module 4: 26 Hooks Library -->
+        <div class="hub-card" onclick="switchView('library-view')">
+          <div>
+            <span class="hub-icon">📚</span>
+            <h3 class="hub-title">26 Viral Kanca Kataloğu</h3>
+            <p class="hub-desc">Türkçe konuşma diline uyarlanmış 26 kanıtlanmış kanca formülü. Ekran yazıları, örnekler ve arama filtresi.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Kataloğu Aç →</span>
+            <span class="hub-tag">hooks_tr.json</span>
+          </div>
+        </div>
+
+        <!-- Module 5: Profile Audit -->
+        <div class="hub-card" onclick="switchView('profile-view')">
+          <div>
+            <span class="hub-icon">👤</span>
+            <h3 class="hub-title">Profil 100 Puan Denetimi</h3>
+            <p class="hub-desc">İsim alanı, biyografi vaadi, sabitlenen 3 gönderi ve öne çıkanları 12 maddelik karara bağlama rubriğiyle optimize edin.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Profili Puanla →</span>
+            <span class="hub-tag">/ig-profile</span>
+          </div>
+        </div>
+
+        <!-- Module 6: Viral Multiple -->
+        <div class="hub-card" onclick="switchView('viral-view')">
+          <div>
+            <span class="hub-icon">🔍</span>
+            <h3 class="hub-title">Viral Analiz & Çarpan</h3>
+            <p class="hub-desc">Nişinizdeki videoları ham izlenmeye göre değil, hesabın kendi ortalamasına göre katlama çarpanıyla (outlier multiple) inceleyin.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Kıyaslamayı Gör →</span>
+            <span class="hub-tag">/ig-viral</span>
+          </div>
+        </div>
+
+        <!-- Module 7: AI Prompt Wizard -->
+        <div class="hub-card" onclick="switchView('prompt-view')">
+          <div>
+            <span class="hub-icon">🤖</span>
+            <h3 class="hub-title">AI Prompt Sihirbazı</h3>
+            <p class="hub-desc">Aktif hesabınızın sektörü, kitle bilgisi ve ses tonuna göre Claude veya ChatGPT için en kusursuz Türkçe promptları üretin.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Prompt Oluştur →</span>
+            <span class="hub-tag">Prompt Sihirbazı</span>
+          </div>
+        </div>
+
+        <!-- Module 8: Multi-Account Management -->
+        <div class="hub-card" onclick="openAccountModal()">
+          <div>
+            <span class="hub-icon">👥</span>
+            <h3 class="hub-title">10 Hesap Yönetimi</h3>
+            <p class="hub-desc">Şifre gerekmeden 10 farklı Instagram hesabını ekleyin; hesaplar arasında tek tıkla geçiş yapıp içerik kurgulayın.</p>
+          </div>
+          <div class="hub-footer">
+            <span>Hesapları Yönet →</span>
+            <span class="hub-tag">10 Profil Hafızası</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. MODULE: HOOK SCORER -->
+    <section id="hook-view" class="view-pane">
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🎯 Video Kancasını (Hook) Test Et</h2>
-            <p class="card-desc">Videonun ilk 2 saniyesinde söyleyeceğin cümleyi yaz. Algoritma 5 kriterde puanlar.</p>
+            <h2 class="card-title">🎯 Kanca (Hook) Puanlayıcı</h2>
+            <p class="card-desc">Videonun ilk 2 saniyesinde söyleyeceğiniz cümleyi yazın. Sistem 5 parametrede analiz eder.</p>
           </div>
+
           <label for="hookInput">İlk Cümle (Kanca):</label>
-          <textarea id="hookInput" placeholder="Örn: 18.000 TL, tek bir eksik sözleşme maddesinin bana maliyeti..."></textarea>
+          <textarea id="hookInput" placeholder="Örn: 18.000 TL, tek bir eksik sözleşme maddesinin bana maliyetidir..."></textarea>
           
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;">
             <button class="btn-secondary" onclick="loadSampleHook(1)">Örnek 1 (Maliyet İtirafı)</button>
@@ -638,13 +989,13 @@
       </div>
     </section>
 
-    <!-- TAB 2: Caption & Akış Linter'ı -->
-    <section id="caption-tab" class="tab-pane">
+    <!-- 3. MODULE: CAPTION LINTER -->
+    <section id="caption-view" class="view-pane">
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">✍️ Açıklama (Caption) Linter'ı</h2>
-            <p class="card-desc">Instagram gönderi metnini yaz. Akışta nasıl kesileceğini ve güncel 5 hashtag kuralını gör.</p>
+            <p class="card-desc">Instagram gönderi metnini yazın. Akışta nasıl kesileceğini ve güncel 5 hashtag kuralını görün.</p>
           </div>
 
           <label for="captionInput">Gönderi Açıklama Metni:</label>
@@ -669,13 +1020,13 @@
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">📱 Akışta Nasıl Görünecek?</h2>
-            <p class="card-desc">Kullanıcı akışta aşağı kaydırırken "...devamı"ndan önce sadece bu kutuyu görür:</p>
+            <p class="card-desc">Kullanıcı akışta aşağı kaydırırken '...devamı'ndan önce sadece bu pencereyi görür:</p>
           </div>
 
           <div class="ig-feed-mockup">
             <div class="ig-user-bar">
-              <div class="ig-avatar"></div>
-              <div class="ig-mock-handle">senin_hesabin</div>
+              <div class="ig-avatar" id="mockAvatar">M</div>
+              <div class="ig-mock-handle" id="mockHandle">@motordayim</div>
             </div>
             <div class="ig-caption-view">
               <span id="feedVisibleText">Metin girdikçe burada görünecek...</span>
@@ -684,23 +1035,23 @@
           </div>
 
           <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
-            💡 <strong>Algoritma Kuralı:</strong> İnsanların %85'i "...devamı"na basmaz. Eğer kanca ve merak unsuru ilk 125 karakterde değilse açıklama okunmadan geçilir.
+            💡 <strong>Algoritma Kuralı:</strong> İnsanların %85'i '...devamı'na basmaz. Eğer kanca ve merak unsuru ilk 125 karakterde değilse açıklama okunmadan geçilir.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 3: Beat Sheet -->
-    <section id="beats-tab" class="tab-pane">
+    <!-- 4. MODULE: BEAT SHEET -->
+    <section id="beats-view" class="view-pane">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">⏱️ Reel Beat Sheet (Konuşma & Çekim Zamanlayıcı)</h2>
-          <p class="card-desc">Reel senaryonu yapıştır. Dakikada 165 kelime hızına göre saniye saniye çekim planını ve 4 saniyeden uzun durgun yerleri gör.</p>
+          <p class="card-desc">Reel senaryonuzu yapıştırın. Dakikada 165 kelime konuşma hızına göre saniye saniye çekim planını ve 4 saniyeden uzun durgun sahneleri görün.</p>
         </div>
 
         <div class="grid-2">
           <div>
-            <label for="scriptInput">Senaryo Metni (Her cümleyi ayrı satıra yaz):</label>
+            <label for="scriptInput">Senaryo Metni (Her cümleyi ayrı satıra yazın):</label>
             <textarea id="scriptInput" style="min-height: 200px;" placeholder="18.000 TL tek bir eksik sözleşme maddesinin bana maliyetidir.
 İşte bu yüzden her müşteriye aynı maddeyi şart koşuyorum.
 Teslimat onaylandığı gün ödeme yapılır.
@@ -723,22 +1074,22 @@ Onay bir his, teslimat ise takvimdir.
           <div>
             <label>Zamanlanmış Çekim Çizelgesi:</label>
             <div id="beatsOutput" style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; min-height: 250px; overflow-y: auto;">
-              <p style="padding: 1.5rem; color: var(--text-muted); text-align: center;">Senaryonu girip 'Hesapla' butonuna bas.</p>
+              <p style="padding: 1.5rem; color: var(--text-muted); text-align: center;">Senaryonuzu girip 'Hesapla' butonuna basın.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 4: 26 Hooks Library -->
-    <section id="library-tab" class="tab-pane">
+    <!-- 5. MODULE: 26 HOOKS LIBRARY -->
+    <section id="library-view" class="view-pane">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">📚 26 Kanıtlanmış Türkçe Kanca Formülü</h2>
-          <p class="card-desc">Kullanmak istediğin şablonu seç, tek tıkla kopyala ve kendi sektörüne uyarla.</p>
+          <h2 class="card-title">📚 26 Kanıtlanmış Türkçe Kanca Kataloğu</h2>
+          <p class="card-desc">Kullanmak istediğiniz şablonu seçin, tek tıkla kopyalayın ve kendi sektörünüze uyarlayın.</p>
         </div>
 
-        <div class="search-bar">
+        <div style="margin-bottom: 1.5rem;">
           <input type="text" id="hookSearch" placeholder="Formül ara (Örn: maliyet, rakam, kaza, hata, sır)..." oninput="filterHooks()">
         </div>
 
@@ -748,12 +1099,12 @@ Onay bir his, teslimat ise takvimdir.
       </div>
     </section>
 
-    <!-- TAB 5: Profile Audit -->
-    <section id="profile-tab" class="tab-pane">
+    <!-- 6. MODULE: PROFILE AUDIT -->
+    <section id="profile-view" class="view-pane">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">👤 Profil 100 Puan Denetim Kontrol Listesi</h2>
-          <p class="card-desc">Instagram profilini 12 kritere göre incele, uyguladığın maddeleri işaretle ve puanını gör.</p>
+          <p class="card-desc">Aktif hesap (<strong id="profAccountSpan">@motordayim</strong>) için 12 kriterli optimizasyon kontrolü.</p>
         </div>
 
         <div class="grid-2">
@@ -762,7 +1113,7 @@ Onay bir his, teslimat ise takvimdir.
           </div>
 
           <div>
-            <div class="score-box" style="position: sticky; top: 2rem;">
+            <div class="score-box" style="position: sticky; top: 5rem;">
               <div class="score-circle" id="profCircle" style="width: 120px; height: 120px;">
                 <span class="score-number" id="profScoreDisplay" style="font-size: 2.2rem;">0</span>
               </div>
@@ -776,24 +1127,62 @@ Onay bir his, teslimat ise takvimdir.
       </div>
     </section>
 
-    <!-- TAB 6: AI Prompt Wizard -->
-    <section id="prompt-tab" class="tab-pane">
+    <!-- 7. MODULE: VIRAL MULTIPLE -->
+    <section id="viral-view" class="view-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">🔍 Viral Kıyaslama & Outlier Multiple</h2>
+          <p class="card-desc">Ham izlenme kanıt değildir. Bir videonun viral olup olmadığını hesabın ortalama izlenmesine göre katlama çarpanı belirler.</p>
+        </div>
+
+        <div class="checks-list" style="margin-bottom: 1.5rem;">
+          <div class="check-row">
+            <div>
+              <strong>15.8x Katlama</strong> · <em>"Kimse size ilk 1000 km'de kaza yapma ihtimalinizin %70 olduğunu söylemiyor"</em>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">285.000 izlenme (Medyan: 18.000) · #3 Kimse Söylemiyor</div>
+            </div>
+            <span class="hub-tag" style="color: var(--success); font-weight:700;">GÜÇLÜ ANOMALİ</span>
+          </div>
+          <div class="check-row">
+            <div>
+              <strong>14.0x Katlama</strong> · <em>"Bu 1.500 TL'lik aparat beni 30.000 TL'lik egzoz cezasından kurtardı"</em>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">168.000 izlenme (Medyan: 12.000) · #1 Maliyet İtirafı</div>
+            </div>
+            <span class="hub-tag" style="color: var(--success); font-weight:700;">GÜÇLÜ ANOMALİ</span>
+          </div>
+          <div class="check-row">
+            <div>
+              <strong>1.3x Sıradan</strong> · <em>"Bugün arkadaşlarla Şile tarafına kahve içmeye sürüyoruz"</em>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">24.000 izlenme (Medyan: 18.000) · Formülsüz Günlük Tutma</div>
+            </div>
+            <span class="hub-tag" style="color: var(--danger); font-weight:700;">DÜŞÜK KALDI</span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          💡 <strong>Araştırma Tavsiyesi:</strong> Nişinizde 3x üzerinde patlayan videoları toplayıp 'swipe file' oluşturun. Bu kancaları kendi sektörünüze uyarlayın.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. MODULE: AI PROMPT WIZARD -->
+    <section id="prompt-view" class="view-pane">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">🤖 Claude & ChatGPT İçin Optimize Prompt Üretici</h2>
-          <p class="card-desc">Fikrini ve hedefini yaz, yapay zekaya vereceğin en kusursuz Türkçe promptu saniyeler içinde kopyala.</p>
+          <p class="card-desc">Aktif hesabınızın bilgileriyle otomatik doldurulmuş, yapay zekaya verilecek en kusursuz Türkçe prompt.</p>
         </div>
 
         <div class="grid-2">
           <div>
             <label for="promptTopic">Reel veya İçerik Konusu:</label>
-            <input type="text" id="promptTopic" placeholder="Örn: Yazılıma yeni başlayanların yaptığı 3 hata">
+            <input type="text" id="promptTopic" placeholder="Örn: 250cc motorla uzun yola çıkılır mı?">
 
             <label for="promptNiche" style="margin-top: 1rem;">Hedef Kitle / Niş:</label>
-            <input type="text" id="promptNiche" placeholder="Örn: 20-30 yaş arası yazılımcı adayları">
+            <input type="text" id="promptNiche" placeholder="Örn: Motosiklet kullanıcıları">
 
             <label for="promptCTA" style="margin-top: 1rem;">Eyleme Çağrı (CTA Kelimesi):</label>
-            <input type="text" id="promptCTA" placeholder="Örn: YOLHARİTASI">
+            <input type="text" id="promptCTA" placeholder="Örn: ROTA">
 
             <button class="btn-action" onclick="buildAIPrompt()">Promptu Oluştur</button>
           </div>
@@ -808,31 +1197,230 @@ Onay bir his, teslimat ise takvimdir.
     </section>
   </main>
 
+  <!-- MODAL: ACCOUNT MANAGER (10 ACCOUNTS) -->
+  <div class="modal-overlay" id="accountModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">👥 Hesap Yönetimi (10 Profil Hafızası)</h3>
+        <button class="btn-close" onclick="closeAccountModal()">×</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Hiçbir şifre gerekmez. Sadece kullanıcı adı veya link girerek istediğiniz hesabı ekleyin ve aralarında tek tıkla geçiş yapın.
+      </p>
+
+      <div class="accounts-list" id="accountsListContainer">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Add New Account Form -->
+      <div style="background: rgba(255,255,255,0.02); border: 1px dashed var(--card-border); border-radius: 14px; padding: 1.25rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--ig-yellow);">+ Yeni Hesap Ekle</h4>
+        
+        <label for="newAccountHandle">Instagram Kullanıcı Adı veya Profil Linki:</label>
+        <input type="text" id="newAccountHandle" placeholder="Örn: @motordayim veya https://instagram.com/motordayim">
+
+        <label for="newAccountName" style="margin-top: 0.8rem;">Görünen İsim / Başlık:</label>
+        <input type="text" id="newAccountName" placeholder="Örn: Ramazan | Motosiklet İnceleme">
+
+        <label for="newAccountNiche" style="margin-top: 0.8rem;">Sektör / Niş & Hedef Kitle:</label>
+        <input type="text" id="newAccountNiche" placeholder="Örn: Motosiklet, Gezi & Ekipman Rehberi">
+
+        <label for="newAccountCTA" style="margin-top: 0.8rem;">Varsayılan CTA Kelimesi:</label>
+        <input type="text" id="newAccountCTA" placeholder="Örn: MOTOR veya REHBER">
+
+        <button class="btn-action" style="width: 100%; margin-top: 1rem;" onclick="addNewAccount()">Hesabı Kaydet</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast">Kopyalandı!</div>
 
   <script>
-    // Tab switching
-    const tabs = document.querySelectorAll('.tab-btn');
-    const panes = document.querySelectorAll('.tab-pane');
+    // MULTI-ACCOUNT MANAGEMENT (Stored in localStorage, up to 10 accounts)
+    const DEFAULT_ACCOUNTS = [
+      {
+        id: "acc_1",
+        handle: "@motordayim",
+        name: "Ramazan | Motosiklet İnceleme",
+        niche: "Motosiklet, Rotalar & Ekipman",
+        cta: "MOTOR"
+      },
+      {
+        id: "acc_2",
+        handle: "@ornek_butik",
+        name: "Minimalist Giyim Butiği",
+        niche: "Kadın Giyim & Kombin Önerileri",
+        cta: "KOMBİN"
+      }
+    ];
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        panes.forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
+    function getSavedAccounts() {
+      const saved = localStorage.getItem("ig_agent_accounts");
+      if (saved) {
+        try { return JSON.parse(saved); } catch(e) {}
+      }
+      return DEFAULT_ACCOUNTS;
+    }
+
+    function saveAccounts(accs) {
+      localStorage.setItem("ig_agent_accounts", JSON.stringify(accs));
+    }
+
+    function getActiveAccountId() {
+      return localStorage.getItem("ig_agent_active_id") || "acc_1";
+    }
+
+    function setActiveAccountId(id) {
+      localStorage.setItem("ig_agent_active_id", id);
+      renderActiveAccount();
+      renderAccountsList();
+    }
+
+    function renderActiveAccount() {
+      const accounts = getSavedAccounts();
+      const activeId = getActiveAccountId();
+      const current = accounts.find(a => a.id === activeId) || accounts[0] || DEFAULT_ACCOUNTS[0];
+
+      // Update UI displays
+      document.getElementById("topAccountLabel").textContent = current.handle;
+      document.getElementById("topAvatar").textContent = current.handle.replace(/[@_]/g, '')[0].toUpperCase() || "I";
+      document.getElementById("viewActiveBadge").textContent = current.handle;
+      document.getElementById("hubAccountName").textContent = current.handle;
+      document.getElementById("mockHandle").textContent = current.handle;
+      document.getElementById("mockAvatar").textContent = current.handle.replace(/[@_]/g, '')[0].toUpperCase() || "I";
+      document.getElementById("profAccountSpan").textContent = current.handle;
+
+      // Pre-fill prompt generator
+      document.getElementById("promptNiche").value = current.niche;
+      document.getElementById("promptCTA").value = current.cta;
+    }
+
+    function renderAccountsList() {
+      const accounts = getSavedAccounts();
+      const activeId = getActiveAccountId();
+      const container = document.getElementById("accountsListContainer");
+      container.innerHTML = "";
+
+      accounts.forEach(acc => {
+        const isActive = acc.id === activeId;
+        const div = document.createElement("div");
+        div.className = `account-item ${isActive ? 'active-item' : ''}`;
+        div.onclick = (e) => {
+          if (!e.target.classList.contains('btn-del-account')) {
+            setActiveAccountId(acc.id);
+            closeAccountModal();
+            showToast(`${acc.handle} aktif hesap seçildi!`);
+          }
+        };
+
+        div.innerHTML = `
+          <div class="account-info">
+            <div class="account-avatar">${acc.handle.replace(/[@_]/g, '')[0].toUpperCase() || "I"}</div>
+            <div>
+              <strong style="color: #fff; font-size: 0.95rem;">${acc.handle} ${isActive ? '✓' : ''}</strong>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">${acc.name} · ${acc.niche}</div>
+            </div>
+          </div>
+          ${accounts.length > 1 ? `<button class="btn-del-account" onclick="deleteAccount('${acc.id}', event)">🗑️</button>` : ''}
+        `;
+        container.appendChild(div);
       });
-    });
+    }
 
-    // Toast notification
-    function showToast(msg = "Kopyalandı!") {
+    function addNewAccount() {
+      const accounts = getSavedAccounts();
+      if (accounts.length >= 10) {
+        alert("En fazla 10 hesap ekleyebilirsiniz. Lütfen önce bir hesabı silin.");
+        return;
+      }
+
+      let rawHandle = document.getElementById("newAccountHandle").value.trim();
+      if (!rawHandle) {
+        alert("Lütfen kullanıcı adı veya link girin.");
+        return;
+      }
+
+      // Clean handle from URL if pasted
+      let handle = rawHandle;
+      if (handle.includes("instagram.com/")) {
+        const parts = handle.split("instagram.com/")[1].split("/")[0].split("?")[0];
+        handle = "@" + parts;
+      }
+      if (!handle.startsWith("@")) handle = "@" + handle;
+
+      const name = document.getElementById("newAccountName").value.trim() || handle;
+      const niche = document.getElementById("newAccountNiche").value.trim() || "Genel İçerik";
+      const cta = document.getElementById("newAccountCTA").value.trim().toUpperCase() || "DETAY";
+
+      const newAcc = {
+        id: "acc_" + Date.now(),
+        handle: handle,
+        name: name,
+        niche: niche,
+        cta: cta
+      };
+
+      accounts.push(newAcc);
+      saveAccounts(accounts);
+      setActiveAccountId(newAcc.id);
+      
+      // Clear form
+      document.getElementById("newAccountHandle").value = "";
+      document.getElementById("newAccountName").value = "";
+      document.getElementById("newAccountNiche").value = "";
+      document.getElementById("newAccountCTA").value = "";
+
+      closeAccountModal();
+      showToast(`${handle} hesabı eklendi ve aktif edildi!`);
+    }
+
+    function deleteAccount(id, e) {
+      e.stopPropagation();
+      let accounts = getSavedAccounts();
+      if (accounts.length <= 1) return;
+      accounts = accounts.filter(a => a.id !== id);
+      saveAccounts(accounts);
+      if (getActiveAccountId() === id) {
+        setActiveAccountId(accounts[0].id);
+      }
+      renderAccountsList();
+      showToast("Hesap silindi.");
+    }
+
+    function openAccountModal() {
+      renderAccountsList();
+      document.getElementById("accountModal").style.display = "flex";
+    }
+
+    function closeAccountModal() {
+      document.getElementById("accountModal").style.display = "none";
+    }
+
+    // VIEW SWITCHING (DASHBOARD HUB VS MODULES)
+    function switchView(viewId) {
+      document.querySelectorAll('.view-pane').forEach(p => p.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+
+      const headerBar = document.getElementById('viewHeaderBar');
+      if (viewId === 'hub-view') {
+        headerBar.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        headerBar.style.display = 'flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // TOAST
+    function showToast(msg = "İşlem tamamlandı!") {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
       toast.style.display = 'block';
       setTimeout(() => { toast.style.display = 'none'; }, 2200);
     }
 
-    // 26 Hooks Database
+    // 26 HOOKS CATALOG
     const hooksData = [
       { id: 1, name: "Maliyet / Hata İtirafı", template: "{Belirli bir miktar}, {tek bir hatanın} bana mâl olduğu bedeldir.", example: "18.000 TL, sözleşmedeki tek bir eksik cümlenin bana maliyeti.", on_screen: "18.000 TL'LİK HATA", best_for: "Hızlı güven oluşturma. Kendi hatasını anlatan insanları herkes sonuna kadar dinler." },
       { id: 2, name: "Olumsuz Emir", template: "Her gün {yaygın eylemi} yapmayı bırakın. Bunun yerine {alternatifi} yapın.", example: "Günde 3 video paylaşmayı bırakın. İki günde bir paylaşın ve gelen her yoruma yanıt verin.", on_screen: "HER GÜN VİDEO ATMA", best_for: "Kaydetmeler ve yorumlar. Emir kipi çok daha fazla dikkat çeker." },
@@ -862,7 +1450,6 @@ Onay bir his, teslimat ise takvimdir.
       { id: 26, name: "En Üstün İfade / Süperlatif", template: "{Hedefe ulaşmanın} {en hızlı / tek} yolu {cevap}.", example: "Instagram'da güven kazanmanın en hızlı yolu, tartışılamayacak kanıtlar sunmaktır.", on_screen: "EN HIZLI YOL", best_for: "Tek iddialı ve net videolar." }
     ];
 
-    // Populate Hooks Grid
     const hooksGrid = document.getElementById('hooksGrid');
     function renderHooks(list) {
       hooksGrid.innerHTML = '';
@@ -897,7 +1484,7 @@ Onay bir his, teslimat ise takvimdir.
       showToast("Örnek kanca panoya kopyalandı!");
     }
 
-    // Hook Scorer JS Heuristics
+    // HOOK SCORER
     function loadSampleHook(type) {
       const input = document.getElementById('hookInput');
       if (type === 1) input.value = "18.000 TL, tek bir eksik sözleşme maddesinin bana maliyetidir.";
@@ -936,21 +1523,21 @@ Onay bir his, teslimat ise takvimdir.
       else if (nWords > 12) lenScore = Math.max(0, 100 - (nWords - 12) * 11);
       if (text.length > 60) lenScore -= 12;
 
-      // 2. Specificity (numbers, currency, spoken numbers)
+      // 2. Specificity
       const hasNumber = /(\$|₺)\s?\d|\b\d+[\d,.]*\b|\b(sıfır|bir|iki|üç|dört|beş|on|yirmi|otuz|elli|yüz|bin|milyon|tl|lira|dolar)\b/i.test(lower);
       const specScore = hasNumber ? 100 : 25;
 
-      // 3. Stakes (Risk, cost, negation)
+      // 3. Stakes
       const stakeWords = ["bırak", "bırakın", "asla", "yanlış", "hata", "kaybettim", "zarar", "maliyet", "batırdım", "iflas", "kimse", "yok", "değil", "iptal", "yasak", "yalan", "gerçek", "tehlike", "uyarı", "pişman", "sadece", "aslında"];
       const hasStakes = stakeWords.some(w => lower.includes(w)) || hasNumber;
       const stakeScore = hasStakes ? 85 : 20;
 
-      // 4. Frontload (Weak opener penalty)
+      // 4. Frontload
       const weakOpeners = ["selam", "merhaba", "arkadaşlar", "evet", "bugün", "aslında", "şey", "yani", "şimdi"];
       const isWeak = weakOpeners.some(w => lower.startsWith(w));
       const frontScore = isWeak ? 20 : 95;
 
-      // 5. Address (sen, siz, imperative)
+      // 5. Address
       const hasAddress = /\b(sen|senin|sana|seni|siz|sizin|size|sizi|kendine)\b/i.test(lower);
       const isImperative = /^(bırak|bırakın|çal|kopyala|sil|dene|izle|oku|kaydet|kullan|kur|yap|yaz|sakın)/i.test(lower);
       const addrScore = hasAddress ? 100 : (isImperative ? 90 : 65);
@@ -984,7 +1571,7 @@ Onay bir his, teslimat ise takvimdir.
       }
     }
 
-    // Caption Linter
+    // CAPTION LINTER
     function analyzeCaption() {
       const text = document.getElementById('captionInput').value;
       const chars = text.length;
@@ -1009,7 +1596,7 @@ Onay bir his, teslimat ise takvimdir.
       document.getElementById('feedCutTail').style.display = chars > cut ? "inline" : "none";
     }
 
-    // Beat Sheet generator
+    // BEAT SHEET
     function generateBeatSheet() {
       const text = document.getElementById('scriptInput').value.trim();
       if (!text) return;
@@ -1043,8 +1630,8 @@ Onay bir his, teslimat ise takvimdir.
           <div class="beat-dur">${dur.toFixed(1)}s</div>
           <div>
             <div>${isHook ? '<strong>[KANCA]</strong> ' : ''}${line}</div>
-            ${isHookTooLong ? '<div class="beat-flag">⚠️ Kanca 3 saniyeyi aşıyor! Kelime sayısını azalt.</div>' : ''}
-            ${!isHook && isLongBeat ? '<div class="beat-flag">⚠️ 4 saniyeden uzun durgun sahne. Araya kesme veya ekrana yazı ekle.</div>' : ''}
+            ${isHookTooLong ? '<div class="beat-flag">⚠️ Kanca 3 saniyeyi aşıyor! Kelime sayısını azaltın.</div>' : ''}
+            ${!isHook && isLongBeat ? '<div class="beat-flag">⚠️ 4 saniyeden uzun durgun sahne. Araya kesme veya ekrana yazı ekleyin.</div>' : ''}
           </div>
         `;
         out.appendChild(div);
@@ -1058,7 +1645,7 @@ Onay bir his, teslimat ise takvimdir.
       out.appendChild(totalDiv);
     }
 
-    // Profile Rubric
+    // PROFILE RUBRIC
     const rubricItems = [
       { id: "name", title: "İsim Alanı (Bold Yazı - 30 Karakter)", pts: 12, desc: "Sadece isim değil, aranabilir sektör anahtar kelimesi taşır ('Ramazan | Motosiklet İnceleme')." },
       { id: "bio1", title: "Biyografi 1. Satır (Net Vaat)", pts: 12, desc: "Ziyaretçiye kim olduğunu ve takip ederse ne kazanacağını tek cümlede söyler." },
@@ -1114,17 +1701,19 @@ Onay bir his, teslimat ise takvimdir.
       }
     }
 
-    // Prompt Wizard
+    // PROMPT WIZARD
     function buildAIPrompt() {
       const topic = document.getElementById('promptTopic').value.trim() || "İçerik fikri";
       const niche = document.getElementById('promptNiche').value.trim() || "Hedef kitle";
       const cta = document.getElementById('promptCTA').value.trim() || "DETAY";
+      const handle = document.getElementById("topAccountLabel").textContent;
 
-      const prompt = `Sen uzman bir Instagram içerik stratejistisin.
-Aşağıdaki konu ve hedef kitle için 26 kanıtlanmış kanca formülünden 3 alternatif kanca ve saniyesine kadar zamanlanmış bir Reel senaryosu yaz.
+      const prompt = `Sen uzman bir Instagram içerik stratejistisisin.
+Aşağıdaki hesap profili, konu ve hedef kitle için 26 kanıtlanmış kanca formülünden 3 alternatif kanca ve saniyesine kadar zamanlanmış bir Reel senaryosu yaz.
 
+HESAP: ${handle}
 KONU: ${topic}
-HEDEF KİTLE: ${niche}
+HEDEF KİTLE / SEKTÖR: ${niche}
 CTA KELİMESİ: "${cta}"
 
 KURALLAR:
@@ -1143,6 +1732,11 @@ KURALLAR:
       navigator.clipboard.writeText(text);
       showToast("Prompt panoya kopyalandı!");
     }
+
+    // INITIALIZATION
+    window.addEventListener("DOMContentLoaded", () => {
+      renderActiveAccount();
+    });
   </script>
 </body>
 </html>

@@ -1,67 +1,55 @@
-# voice.md
+# voice.md (Ses ve Kimlik Profili)
 
-Copy this to `~/.claude/instagram/voice.md` and fill it in. Every skill in the
-pack reads it. Ten minutes here is the difference between scripts you shoot and
-scripts you rewrite.
+Bu dosyayı doldurarak `~/.claude/instagram/voice.md` (veya proje içindeki `templates/ses_profili.md`) olarak kaydedin. Bu paketteki her yetenek bu dosyayı okur. Burada ayıracağınız 10 dakika, çekeceğiniz senaryolarla çöpe atacağınız senaryolar arasındaki farkı belirler.
 
-If you would rather not fill it in by hand, send Claude three of your own reels
-or captions and say "write my voice.md from these". That works better than
-guessing at the answers.
+Kendi başınıza doldurmak istemiyorsanız, yapay zekaya kendi çektiğiniz 3 Reel videosunun metnini yapıştırıp "Bunu benim ses profilime dönüştür" deyin.
 
-This file matters more on Instagram than anywhere else, because you have to say
-the words out loud. A line you would never say is not a draft, it is a retake.
+Instagram'da bu dosya her yerden daha önemlidir çünkü bu kelimeleri kamera karşısında sesli olarak telaffuz edeceksiniz. Asla söylemeyeceğiniz bir cümle taslak değil, heba edilmiş bir çekimdir.
 
 ---
 
-## Who I am
+## Kimim Ben?
 
-- **Name:**
-- **Handle:**
-- **What I do, in one sentence:**
-- **Who I am talking to:** (be specific: "photographers charging under $2,000",
-  not "creatives")
-- **What I sell:**
+- **İsim / Hitap:**
+- **Kullanıcı Adı (@handle):**
+- **Ne iş yapıyorum (Tek bir net cümle):**
+- **Kime hitap ediyorum (Net ve spesifik olun, genel kitle değil):**
+- **Ne satıyorum / Hangi hizmeti veriyorum:**
 
-## What I sound like
+## Sesim ve Tarzım Nasıl?
 
-- **Three of my own reels or captions that sound most like me:** (paste them)
-- **On camera I am:** (fast and loud / dry / calm / funny / deadpan)
-- **Words I actually use:**
-- **Words I would never say out loud:**
-- **Do I swear:** (yes / mild / no)
-- **Emoji in captions:** (never / one, rarely / freely)
-- **Face on camera:** (always / sometimes / faceless)
-- **Voiceover or to-camera:**
-- **Pace:** (words per minute, if you have timed yourself reading a script.
-  `beats.py --wpm` uses this. Most people are between 150 and 200.)
+- **Bana en çok benzeyen 3 Reel veya post metnim:** (Buraya yapıştırın)
+- **Kamera karşısında nasılım:** (Hızlı ve enerjik / Sakin ve net / Esprili / Ağırbaşlı / Samimi)
+- **Sıkça kullandığım favori kelimelerim / ifadelerim:**
+- **Asla ağzıma almayacağım, yapay bulduğum kelimeler:**
+- **Açıklamalarda emoji kullanımı:** (Asla / Nadiren ve tek bir tane / Serbestçe)
+- **Kamera karşısında yüzüm:** (Her zaman / Bazen / Yüzsüz ekran kaydı)
+- **Konuşma hızım (Dakikada kelime sayısı, ortalama 150-180 arası):**
 
-## My positions
+## Savunduğum Gerçekler ve Duruşum
 
-Three to five things I believe that some of my audience does not. These are
-where the good reels come from.
+Sektörümde çoğunluğun savunduğu ama benim kesinlikle katılmadığım 3-5 gerçek. En iyi videolar tam olarak bu fikir ayrılıklarından doğar:
 
-1.
-2.
-3.
+1. 
+2. 
+3. 
 
-## Off limits
+## Bahsetmeyeceğim Yasak Alanlar
 
-- **Topics I do not post about:**
-- **Clients, numbers or names I cannot say publicly:**
-- **Claims I am not allowed to make:** (regulated industry, employer policy, NDA)
+- **Asla paylaşmadığım konular:**
+- **Halka açık söyleyemeyeceğim müşteri isimleri, özel rakamlar:**
+- **Yasal veya mesleki olarak yapamayacağım iddialar:**
 
-## Proof I can use
+## Kullanabileceğim Gerçek Kanıtlar ve Rakamlar
 
-Real numbers, outcomes and stories I am happy to put my name on. The skills will
-never invent one, so if this section is empty, every draft comes back with
-`{{your number}}` in it.
+Gönül rahatlığıyla arkasında durabileceğim somut rakamlar, tecrübeler ve faturalar. Yapay zeka asla sahte veri uydurmaz; bu alan boşsa çıktılarda `{{senin rakamın}}` şeklinde yer alır:
 
--
--
--
+- 
+- 
+- 
 
-## The ask
+## Eyleme Çağrım (CTA)
 
-- **My keyword CTA, if I use one:** (one word, sayable, no spaces)
-- **What the keyword sends them:**
-- **Where my link goes:**
+- **Varsayılan anahtar kelimem (Tek kelime, kolay yazılan):** (Örn: MOTOR, REHBER, DETAY)
+- **Bu kelimeyi yazana ne gönderiyorum:**
+- **Profil linkim nereye yönlendiriyor:**

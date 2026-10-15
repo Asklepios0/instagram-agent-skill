@@ -1,147 +1,77 @@
 ---
 name: ig-reel
 description: >-
-  Write an Instagram Reel from a raw idea - hook options off 26 formulas, the
-  spoken script, the on-screen text, and a timed beat sheet - in the user's own
-  voice and scored before they shoot it. Use whenever the user wants a Reel, a
-  short-form video script, a hook, a voiceover, "make a reel about X", "what
-  should I say in this video", or is about to record and does not have the
-  first line yet.
+  Ham bir fikirden 26 formüle dayalı kanca seçenekleri, seslendirilecek senaryo,
+  ekran yazıları ve saniyesine kadar zamanlanmış çekim planı (beat sheet) üreterek
+  Reel hazırlar. Kullanıcının kendi ses tonunda yazar ve çekimden önce kancayı puanlar.
 ---
 
 # ig-reel
 
-Turns one raw idea into a Reel that somebody finishes.
+Aklınızdaki ham bir fikri, izleyicinin sonuna kadar izleyeceği tam bir Reel senaryosuna dönüştürür.
 
-Two tools live in this folder and they both actually run. Use them. Do not
-eyeball the hook and do not guess at the length.
+Bu klasörde iki güçlü Python aracı yer alır ve doğrudan çalıştırılabilir:
 
 ```bash
-python3 hookscore.py hooks.txt              # rank your hook options
-python3 hookscore.py --hook "one line"      # score a single one
-python3 beats.py script.txt --target 30     # timed beat sheet before you shoot
+python3 hookscore.py hooks.txt              # Kanca alternatiflerini puanlayıp sıralayın
+python3 hookscore.py --hook "tek bir cümle"  # Tek bir kancayı puanlayın
+python3 beats.py senaryo.txt --target 30    # Çekime başlamadan önce saniyelik çekim planı
 ```
 
-## Before you write
+## Yazmaya Başlamadan Önce
 
-1. Read `~/.claude/instagram/voice.md` if it exists. That is the user's voice
-   profile: how they talk on camera, what they never say, who they are talking
-   to. If it does not exist, ask for **three of their own reels**, transcribe or
-   read them, infer the voice, and write the file. A script in the wrong voice
-   is unusable, because they have to say it out loud.
-2. Read `hooks.json` in this folder. 26 formulas, each with a template, a filled
-   example, the on-screen version, what it is for, and how it gets ruined.
-   Four of them are in there because they kept turning up in real hooks, not
-   because they completed a pattern.
-3. If the idea is thin, do not pad it. Ask one batched question: what happened,
-   to whom, and what did it cost or return. A Reel needs one specific true
-   thing. Get it before writing.
-4. If `~/.claude/instagram/swipe.md` exists, read it. `/ig-viral` writes that
-   file, and it is the user's own evidence about which formulas are working in
-   their niche right now. It beats the defaults in this file.
+1. `templates/ses_profili.md` (veya `~/.claude/instagram/voice.md`) dosyasını okuyun. Bu dosya kullanıcının kamera karşısında nasıl konuştuğunu, hangi kelimeleri asla kullanmadığını ve kime hitap ettiğini tanımlar.
+2. Bu klasördeki `hooks_tr.json` dosyasını inceleyin. Türkçe konuşma diline uyarlanmış 26 formül, şablonlar, ekran yazıları ve örnekler içerir.
+3. Ham fikir zayıfsa laf kalabalığı yapmayın; tek bir somut soru sorun: Ne oldu, kimin başına geldi ve neye mâl oldu / ne kazandırdı?
+4. `/ig-viral` çıktısı olan `swipe.md` varsa inceleyin. Bu dosya, kullanıcının kendi sektöründe o anda çalışan formüllerin kanıtıdır.
 
-## The shape
+## Reel'in Anatomisi
 
-A Reel is decided in the first two seconds and kept by the next five.
+Bir Reel ilk iki saniyede kazanılır ve sonraki beş saniyede elde tutulur:
 
 ```
-0:00 - 0:02   HOOK        the claim. Spoken line and on-screen line, written
-                          separately. Motion in the first frame, not a static face.
-0:02 - 0:07   THE STAKE   why this matters to the person watching. One line.
-0:07 - ...    THE BODY    one idea per beat, and the frame changes every beat.
-LAST 3s       THE PAYOFF  deliver what the hook promised, then the single ask.
-LAST LINE     THE LOOP    echo one word from the hook so the replay lands clean.
+0:00 - 0:02   KANCA (HOOK)       İddia. Konuşulan cümle ve ekran yazısı ayrı yazılır. İlk karede hareket olmalı, donuk bir yüz değil.
+0:02 - 0:07   RİSK / ÇIKAR (STAKE) İzleyen kişi için bunun neden önemli olduğu. Tek bir net cümle.
+0:07 - ...    GÖVDE (BODY)       Her çekimde (beat) tek bir fikir; her fikirde kamera açısı/kadraj değişir.
+SON 3 SANİYE  ÖDÜL & EYLEM (PAYOFF) Kancanın vaat ettiği sonucu teslim edin, ardından tek bir eylem isteyin (CTA).
+SON CÜMLE     DÖNGÜ (LOOP)       Kancadaki ilk kelimeye bağlanacak bir kelimeyle bitirin ki video başa sarıldığında kusursuz aksın.
 ```
 
-Length: 15 to 45 seconds is the working range. Reels run to 3 minutes and
-almost nobody should use it. Under 7 seconds the loop counts inflate and
-nothing else does.
+Süre: 15 ile 45 saniye arası en ideal çalışma aralığıdır. 7 saniyenin altı yapay döngü şişirmesi yapar, güven vermez.
 
-## The loop
+## İş Akışı
 
-**1. Pick three hooks, not one.** Run the idea through `hooks.json`, choose
-three formulas that genuinely fit it, and write the spoken line plus the
-on-screen line for each. Different formulas, not three rewrites of one.
-
-**2. Score them.** Put the three spoken lines in a file, one per line, and run
-`hookscore.py`. Show the user the ranking. If the top one is under 50, you do
-not have the hook yet and no amount of editing fixes that.
-
-**3. Write the script** on the winning hook. Plain spoken language, the way the
-user actually talks. Contractions. Short lines. No sentence they would have to
-rehearse.
-
-**4. Time it.** Run `beats.py script.txt --target {length}`. Fix every flag:
-a hook past 3 seconds, any beat over 4 seconds, a run of beats with nothing
-concrete in them, no loop. Re-run until it is clean.
-
-**5. Humanize it.** Run the script through `/ig-human` before showing it. A
-written-sounding line is obvious the moment someone says it out loud.
-
-**6. Print the block.** The script in a fenced block, the on-screen text as a
-separate list with timings, and then:
+1. **Bir değil, üç kanca çıkarın.** Fikri `hooks_tr.json` üzerinden geçirin ve gerçekten uyan 3 farklı formül seçin. Aynı cümlenin 3 varyasyonu değil, 3 farklı psikolojik tetikleyici olsun.
+2. **Kancaları puanlayın.** Konuşulacak 3 cümleyi `hookscore.py` ile test edin. En yüksek puan 50'nin altındaysa kanca henüz olmamıştır; senaryo yazımına geçmeyin.
+3. **Senaryoyu yazın.** Kazanan kancanın üzerine senaryoyu inşa edin. Doğal Türkçe konuşma dili kullanın. Sesli okunduğunda zorlayacak devrik veya yapay cümleler yazmayın.
+4. **Zamanlayın.** `beats.py senaryo.txt --target 30` çalıştırın. Kancanın 3 saniyeyi aşması, 4 saniyeden uzun durgun sahneler veya döngü eksikliği varsa düzeltin.
+5. **İnsanlaştırın.** `/ig-human` üzerinden geçirerek yapay zeka kokan klişeleri ("dijital dünyada", "çığır açan" vb.) temizleyin.
+6. **Kopyala-yapıştır hazır teslim edin:**
 
 ```
-REEL READY
-hook:       #3 Nobody Tells You, scored 86 STRONG
-length:     28.4s across 9 beats at 165 wpm
-on-screen:  6 cards
-humanizer:  4 artefacts stripped, human score 81 PASS
-caption:    run /ig-caption next
-
-Reply "yes" to log it, or tell me what to change.
+REEL HAZIR
+kanca:       #3 Kimse Söylemiyor, 86 PUAN (GÜÇLÜ)
+süre:        165 kelime/dk ile 9 sahnede 28.4 saniye
+ekran yazısı: 6 kart
+insanlaştırma: 4 yapay zeka kalıntısı temizlendi, İnsan Skoru 81 (GEÇTİ)
+açıklama:    sıradaki komut: /ig-caption
 ```
 
-**7. Never publish.** This skill produces a script. The user shoots it and
-posts it. On "yes", append to `~/.claude/instagram/log.md` with the date, the
-hook formula used and the first line, so `/ig-audit` has a history later.
+7. **Asla otomatik paylaşmayın.** Bu araç senaryoyu yazar; siz çeker ve kendi elinizle paylaşırsınız.
 
-## On-screen text is a separate script
+## Ekran Yazıları Ayrı Bir Senaryodur
 
-Write it separately, every time. It is read before it is heard.
+Her zaman ayrı yazın. Çünkü ekran yazısı duyulmadan önce okunur.
 
-- **Six words or fewer per card.** It is being read at arm's length by someone
-  who is not listening yet.
-- **The hook card is up at frame 1**, not after a beat of silence.
-- **Keep it inside the safe zone.** On a 1080x1920 frame, nothing above y=230
-  or below y=1440, and keep the right 230 pixels clear. The interface sits on
-  top of everything outside that box: the caption, the action rail, the audio
-  strip.
-- **Never put the hook where the caption sits.** That is the bottom of the
-  frame and it is covered.
-- **Burn in captions for the body.** Most people watch muted first.
+- Kart başına **en fazla 4-6 kelime**.
+- Kanca yazısı **1. karede** hemen ekranda olmalıdır.
+- **Güvenli alanda kalın:** 1080x1920 dikey kadrajda üstten 230 piksel, alttan 440 piksel ve sağdan 230 piksel boşluk bırakın (Instagram arayüz butonları ve açıklama bu alanları kapatır).
+- Çoğu kullanıcı videoyu sessiz izlemeye başladığı için altyazıları videoya gömün.
 
-## Rules that make the difference
+## Fark Yaratan Kritik Kurallar
 
-- **One idea per Reel.** If the script has two, you have two Reels. Say so.
-- **Numbers over adjectives.** "$4,200" beats "a lot". If the user has not
-  given a number, ask for one rather than writing around the hole.
-- **Cut the intro.** No greeting, no "in this video", no name, no logo sting.
-  The video starts at the sentence you would normally reach at second six.
-- **Change the frame every beat.** A static shot for 8 seconds is where people
-  leave, and `beats.py` will flag it.
-- **One ask at the end.** Comment a keyword, save it, or follow. One.
-- **Never fabricate.** No invented metrics, clients, revenue or outcomes under
-  the user's name, even as a placeholder. If a number is needed and unknown,
-  leave `{{your number}}` in the script and flag it.
-- **Do not write a script around a trending audio the user cannot use.** If the
-  idea needs the user's own voice, say so.
-
-## Example
-
-```
-/ig-reel we cut proposal time from 5 hours to 20 minutes with one template
-```
-
-```
-HOOKS  (scored)
-  86  STRONG  #5  Time Collapse   "Proposals used to take me five hours. Twenty minutes now."
-                                  on screen: 5 HOURS -> 20 MIN
-  71  STRONG  #1  Cost Confession "I billed four hours a week for formatting. For two years."
-                                  on screen: 2 YEARS WASTED
-  54  OK      #9  The Steal       "Steal the proposal template that did it."
-                                  on screen: STEAL THIS
-
-Shooting #5: the ratio is believable, it reads in one glance on screen,
-and the number is yours.
-```
+- **Reel başına tek bir ana fikir.** İki fikir varsa iki ayrı video çekin.
+- **Sıfatlar yerine sayılar.** "Çok pahalıydı" yerine "18.000 TL" deyin.
+- **Giriş laf kalabalığını kesin.** Selamlaşma, "bu videoda...", logo animasyonu yok. Normalde 6. saniyede söyleyeceğiniz cümleyle başlayın.
+- **Her çekimde kadraj değiştirin.** 8 saniye boyunca sabit duran plan izleyicinin kaçmasına yol açar.
+- **Sonunda tek bir eylem isteyin:** Ya yorumda kelime yazdırın, ya kaydettirin, ya takip ettirin. Asla hepsini birden istemeyin.
