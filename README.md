@@ -1,43 +1,56 @@
-# Instagram Agent Skill (Türkçe Sürüm & Web Stüdyosu)
+# Instagram İçerik & Büyüme Stüdyosu (Türkçe Sürüm)
 
-Bir Instagram hesabını sıfırdan zirveye yönetmek için tasarlanmış **13 yapay zeka yeteneği (skill)**, bilgisayarınızda çalışan **5 yerel analiz motoru** ve tarayıcıdan anında kullanılabilen **GitHub Pages Web Stüdyosu**.
+Bir Instagram hesabını sıfırdan zirveye taşımak için geliştirilmiş **13 yapay zeka aracı**, bilgisayarınızda yerel çalışan **5 analiz motoru** ve tarayıcıdan anında kullanılabilen **Web Stüdyosu**.
 
-Tamamen ücretsiz, MIT lisanslı, kayıt gerektirmez, API anahtarı istemez, Instagram şifresi talep etmez.
+Tamamen ücretsiz, MIT lisanslı, kayıt gerektirmez, API anahtarı istemez, Instagram şifrenizi asla talep etmez.
 
-> Bu proje, [Jake Schincariol](https://github.com/Jakeschincariol/instagram-agent-skill) tarafından geliştirilen açık kaynaklı projenin **kapsamlı Türkçe yerelleştirmesi, Türkçe konuşma diline uyarlanmış kanca formülleri ve çoklu hesap destekli Web Arayüzü** eklenmiş halidir.
+> Bu proje, [Jake Schincariol](https://github.com/Jakeschincariol/instagram-agent-skill) tarafından geliştirilen açık kaynaklı projenin **tamamen Türkçe konuşma diline uyarlanmış, 26 yerel açılış formülü eklenmiş ve 10 hesaba kadar destek veren Web Stüdyosu** ile zenginleştirilmiş halidir.
 
 ---
 
-### 🌐 Canlı Web Stüdyosu (Hemen Kullanın)
-Kurulum yapmadan, doğrudan tarayıcınızdan kanca puanlamak, açıklama denetlemek ve 26 kanca formülünü incelemek için:  
+### 🌐 Canlı Web Stüdyosu (Hemen Deneyin)
+Kurulum yapmadan, doğrudan tarayıcınızdan açılış cümlenizi test etmek, açıklamanızı akış simülatöründe görmek ve 26 kanca formülünü incelemek için:  
 👉 **[https://asklepios0.github.io/instagram-agent-skill/](https://asklepios0.github.io/instagram-agent-skill/)**
 
 ---
 
-## 🎯 Temel Felsefe: "Siz Evet Demeden Hiçbir Şey Paylaşılmaz"
+## 💡 Hızlı Sözlük: Bu Terimler Ne Anlama Geliyor? (Kafanız Karışmasın)
 
-Bu araç bir otomatik paylaşım botu **değildir**. Instagram'ın resmi İçerik Yayınlama API'si dışındaki tüm botlar ve otomatik giriş yazılımları Instagram Kullanım Koşulları'nı ihlal eder ve hesabınızın kısıtlanmasına (shadowban / action-block) sebep olur.
+Sosyal medyada sıkça kullanılan teknik terimleri herkesin kolayca anlayabileceği sade bir dille açıklayalım:
 
-Bu yüzden sistem şöyle çalışır: **Yapay zeka yazar, puanlar, kurgular ve zamanlar; siz onaylar ve kendi elinizle paylaşırsınız.** Sıfır ban riski, maksimum içerik kalitesi.
+* **Açılış Cümlesi (Kanca / Hook):** Bir Reels videosunun ilk 2 saniyesinde söylediğiniz veya ekrana yazdığınız en can alıcı ilk cümledir. Görevi, aşağı kaydıran izleyiciyi ekranda durdurmaktır.
+* **Eyleme Çağrı (CTA - Call to Action):** Takipçiye videonun veya açıklamanın sonunda ne yapacağını açıkça söylemektir. *"Yoruma MOTOR yaz"*, *"İleride lazım olursa diye kaydet"* veya *"Profilden linke tıkla"* gibi tek ve net bir eylemdir.
+* **Sahne & Çekim Planı (Beat Sheet):** Senaryonuzun her cümlesinin kaç saniye süreceğini ve izleyicinin sıkılmaması için nerede kamera açısının değişmesi gerektiğini gösteren saniyelik çekim rehberidir.
+* **Patlama Çarpanı (Outlier Multiple):** Bir videonun, o hesabın normal ortalama izlenmesine kıyasla kaç kat patladığıdır. Normali 10.000 izlenen bir hesabın 150.000 izlenen videosu 15 kat (15x) patlamış gerçek bir viraldir.
+* **İlk 125 Karakter Kuralı:** Instagram akışında bir gönderinin altındaki "...daha fazla" butonuna basılmadan önce ekranda görünen ilk iki satırdır. İnsanların %85'i devamına basmadığı için en önemli mesaj buraya yazılmalıdır.
+* **İnsanlaştırma (Humanize):** *"Dijital dünyada", "çığır açan", "unutmayın ki"* gibi robotik yapay zeka klişelerini ve kopyalama filigranlarını temizleyip samimi, doğal konuşma diline çevirme işlemidir.
+
+---
+
+## 🎯 Temel Felsefe: "Siz Onaylamadan Hiçbir Şey Paylaşılmaz"
+
+Bu araç bir otomatik paylaşım botu **kesinlikle değildir**. Instagram'ın kuralları gereği harici bot yazılımları hesabınızın kısıtlanmasına (shadowban veya işlem engeli) sebep olur.
+
+Bu yüzden sistem güvenle çalışır: **Yapay zeka analiz eder, puanlar, kurgular ve zamanlar; siz kontrol edip kendi elinizle paylaşırsınız.** Sıfır hesap riski, maksimum içerik kalitesi.
 
 ---
 
 ## 📦 13 Temel Yetenek (Komutlar)
 
-| Komut | Ne İşe Yarar? |
+| Komut | Ne İşe Yarar? (Sade Anlatım) |
 | :--- | :--- |
-| **`/ig-reel`** | Aklınızdaki ham bir fikri tam bir Reel senaryosuna dönüştürür. 26 formülden 3 alternatif kanca çıkarır, bunları puanlar, ekranda çıkacak yazıları ve saniyesine kadar zamanlanmış çekim planını (beat sheet) hazırlar. |
-| **`/ig-viral`** | Sektörünüzde gerçekten çalışan videoları bulur; ham izlenmeye göre değil, hesabın kendi ortalama izlenmesine kıyasla **kaç kat patladığına (outlier multiple)** göre sıralar. |
+| **`/ig-reel`** | Aklınızdaki ham bir fikri izleyicinin sonuna kadar izleyeceği tam bir Reel senaryosuna dönüştürür. 26 formülden 3 alternatif açılış çıkarır, bunları puanlar, ekrana yazılacak yazıları ve saniyelik sahne planını hazırlar. |
+| **`/ig-viral`** | Sektörünüzde gerçekten çalışan videoları bulur; ham izlenmeye göre değil, hesabın kendi ortalamasına göre **kaç kat patladığına (patlama çarpanı)** göre sıralar. |
 | **`/ig-caption`** | Gönderi açıklaması yazar ve denetler. Akışta "...daha fazla" butonundan önce görünen **ilk 125 karakteri** optimize eder. Güncel 5 hashtag kuralını uygular. |
-| **`/ig-carousel`** | Kaydırmalı gönderi kurgular. Kaydırmayı tetikleyen kapak, slayt metinleri ve 1080x1350 formatına uygun görsel kurgular üretir. |
-| **`/ig-story`** | Günlük hikaye serileri, hangi etkileşim çıkartmasının (anket, soru vb.) ne zaman kullanılacağı ve takipçiyi DM'e çeken huniler tasarlar. |
-| **`/ig-profile`** | Profilinizi (biyografi, isim alanı, link, öne çıkanlar) 12 kriterli bir rubrikle 100 üzerinden puanlar ve puan kaybettiren kısımları düzeltir. |
-| **`/ig-plan`** | Haftalık içerik takvimini, paylaşım formatlarını, zamanlamayı ve günlük etkileşime girilecek 10 hedef hesabı belirler. |
+| **`/ig-carousel`** | Kaydırmalı gönderi kurgular. Kaydırmayı tetikleyen kapak, slayt metinleri ve ekran görüntüsü aldıracak özet slaytını hazırlar. |
+| **`/ig-story`** | Günlük hikaye serileri tasarlar; hangi etkileşim çıkartmasının (anket, soru kutusu vb.) nerede kullanılacağını ve takipçiyi DM'e çeken adımları belirler. |
+| **`/ig-profile`** | Profilinizi (biyografi, isim alanı, link, öne çıkanlar) 12 maddelik kontrol listesiyle 100 üzerinden puanlar ve puan kaybettiren kısımları düzeltir. |
+| **`/ig-plan`** | Haftalık içerik takvimini, paylaşım türlerini, zamanlamayı ve günlük etkileşime girilecek 10 hedef hesabı belirler. |
 | **`/ig-human`** | Metindeki yapay zeka kokusunu, *"dijital dünyada", "çığır açan", "unutmayın ki"* gibi klişeleri, uzun tireleri ve kopyalama filigranlarını temizler. |
 | **`/ig-comment`** | Başka hesapların gönderilerine atılacak 9 farklı kategoride dikkat çekici yorum üretir. Asla "🔥🔥🔥" veya boş spam yapmaz. |
 | **`/ig-reply`** | Kendi gönderinizin altındaki yorumları ayıklar (müşteri adayı, soru, gürültü vb.) ve öncelik sırasına göre yanıtlar hazırlar. |
 | **`/ig-dm`** | Yorumdan gelen anahtar kelime teslimatını, ilk mesajı, iş birliği teklifini ve en fazla 2 aşamalı takip (follow-up) mesajlarını yazar. |
-| **`/ig-repurpose`** | 1 uzun videodan, podcast'ten veya bültenden bir haftalık bağımsız Reels ve Carousel gönderileri türetir. |
+| **`/ig-repurpose`** | 1 uzun videodan, podcast'ten veya yazıdan bir haftalık bağımsız Reels ve Carousel gönderileri türetir. |
 | **`/ig-audit`** | Önceden paylaştığınız içeriklerin otopsisini yapar. İzlenme sayısı yerine erişim başına kaydetme ve paylaşım oranlarıyla analiz eder. |
 
 ---
@@ -46,30 +59,30 @@ Bu yüzden sistem şöyle çalışır: **Yapay zeka yazar, puanlar, kurgular ve 
 
 Hiçbir harici API'ye veya internet bağlantısına ihtiyaç duymaz. Tamamen sizin bilgisayarınızda yerel çalışır:
 
-### 1. Kanca Puanlayıcı (`hookscore.py`)
+### 1. Açılış Cümlesi (Kanca) Puanlayıcı (`hookscore.py`)
 ```bash
 python skills/ig-reel/hookscore.py --hook "18.000 TL tek bir eksik sözleşme maddesinin bana maliyetidir"
 ```
-* Kancanızı 5 temel kritere göre (Uzunluk, Somutluk, Gerilim/Maliyet, Başa Yerleşim ve Hitap) 100 üzerinden puanlar.
-* *"Selam arkadaşlar..."* gibi ölü açılışları veya *"Kaydırmayı durdur"* klişelerini **ÖLÜMCÜL HATA (DEALBREAKER)** olarak anında yakalar.
+* Açılış cümlenizi 5 kritere göre (Uzunluk, Somutluk, Kaybetme Riski, Başa Yerleşim ve Hitap) 100 üzerinden puanlar.
+* *"Selam arkadaşlar..."* gibi ölü açılışları veya *"Kaydırmayı durdur"* klişelerini **İZLEYİCİYİ KAÇIRAN HATA** olarak anında yakalar.
 * Türkçe para birimlerini (TL, ₺), yazıyla yazılan sayıları ve konuşma dilini tam destekler.
 
-### 2. Çekim Zamanlayıcı (`beats.py`)
+### 2. Sahne & Çekim Zamanlayıcı (`beats.py`)
 ```bash
 python skills/ig-reel/beats.py senaryo.txt --target 30
 ```
-* Metni dakikada 165 kelime Türkçe konuşma hızına göre hesaplar.
-* Kancanın 3 saniyeyi aşıp aşmadığını, 4 saniyeden uzun süren durgun/sıkıcı yerleri ve videonun sonunun başına bağlanıp bağlanmadığını (loop video) denetler.
+* Metni dakikada 165 kelime normal Türkçe konuşma hızına göre hesaplar.
+* Açılışın 3 saniyeyi aşıp aşmadığını, 4 saniyeden uzun süren durgun/sıkıcı yerleri ve videonun sonunun başına bağlanıp bağlanmadığını (döngü video) denetler.
 
-### 3. Açıklama Denetleyici (`caption.py`)
+### 3. Gönderi Açıklaması Denetleyici (`caption.py`)
 ```bash
 python skills/ig-caption/caption.py aciklama.txt
 ```
 * Kullanıcının akışta göreceği ilk 125 karakterlik pencereyi bir kutu içinde simüle eder.
-* Güncel kurala göre **maksimum 5 hashtag** sınırını denetler (30 hashtag dönemi bitti).
+* Güncel kurala göre **en fazla 5 hashtag** sınırını denetler (30 hashtag dönemi bitti).
 * Net bir eyleme çağrı (CTA: yoruma yaz, DM at, kaydet) olup olmadığını kontrol eder.
 
-### 4. İnsanlaştırıcı & AI Dedektörü (`humanize.py` & `detect.py`)
+### 4. İnsanlaştırıcı & Doğallık Kontrolü (`humanize.py` & `detect.py`)
 ```bash
 python skills/ig-human/humanize.py metin.txt --report
 ```
@@ -79,7 +92,7 @@ python skills/ig-human/humanize.py metin.txt --report
 ```bash
 python skills/ig-viral/swipe.py captured.tsv
 ```
-* Sektördeki videoları hesapların kendi ortalama (medyan) izlenmelerine kıyasla kaç kat patladığına (outlier multiple) göre sıralar ve 26 kanca formülüyle eşleştirir.
+* Sektördeki videoları hesapların kendi ortalama (medyan) izlenmelerine kıyasla kaç kat patladığına göre sıralar ve 26 kanca formülüyle eşleştirir.
 
 ---
 
@@ -104,7 +117,7 @@ python skills/ig-viral/swipe.py captured.tsv
 * Hangi kelimeleri sık kullanır, hangilerini asla ağzınıza almazsınız?
 * Sektörünüzde çoğu kişinin savunduğu ama sizin katılmadığınız gerçekler neler?
 
-Bu dosya doldurulduğunda, üretilen tüm senaryolar ve metinler doğrudan **sizin ağzınızdan çıkmış gibi** konuşur.
+Bu dosya doldurulduğunda, üretilen tüm senaryolar ve metinler doğrudan **sizin ağzınızdan çıkmış gibi** doğal konuşur.
 
 ---
 

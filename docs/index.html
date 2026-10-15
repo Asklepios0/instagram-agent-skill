@@ -769,6 +769,57 @@
       display: none;
       z-index: 1000;
     }
+
+    /* EXPLAINER & HELP BOXES */
+    .explainer-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      margin-top: 1.25rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .explainer-card strong {
+      color: #f1f5f9;
+    }
+    .dictionary-banner {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .dictionary-banner h4 {
+      color: #818cf8;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dictionary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+    .dict-item {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.84rem;
+    }
+    .dict-item strong {
+      color: var(--ig-yellow);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
   </style>
 </head>
 <body>
@@ -778,8 +829,8 @@
     <div class="brand-group" onclick="switchView('hub-view')">
       <div class="brand-logo">IG</div>
       <div>
-        <div class="brand-title">Instagram Agent TR</div>
-        <div style="font-size: 0.72rem; color: var(--text-muted);">Çoklu Hesap Stüdyosu</div>
+        <div class="brand-title">Instagram İçerik Stüdyosu</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted);">Çoklu Hesap & Büyüme Araçları</div>
       </div>
     </div>
 
@@ -807,76 +858,107 @@
     <!-- 1. DASHBOARD HUB (ANA SAYFA) -->
     <section id="hub-view" class="view-pane active">
       <div class="hero-section">
-        <div class="hero-badge">🚀 13 Skill · 5 Python Motoru · 26 Kanca Şablonu</div>
-        <h1 class="hero-title">İçerik & Büyüme Stüdyosu</h1>
-        <p class="hero-desc">Her gönderiyi şansa bırakmadan; kancasını puanlayarak, akış penceresini test ederek ve konuşma süresini hesaplayarak kurgulayın.</p>
+        <div class="hero-badge">🎯 13 Akıllı Araç · 26 Kanıtlanmış Açılış Şablonu · Çoklu Hesap Desteği</div>
+        <h1 class="hero-title">Instagram Büyüme & İçerik Stüdyosu</h1>
+        <p class="hero-desc">Reels videolarınızı ve gönderilerinizi şansa bırakmayın. Açılış cümlenizi test edin, akışta nasıl görüneceğini simüle edin ve konuşma sürenizi saniye saniye planlayın.</p>
         
         <div class="active-account-banner" id="hubAccountBanner">
-          <span>👤 Aktif Profil: <strong id="hubAccountName">@motordayim</strong> (Motosiklet & İnceleme)</span>
+          <span>👤 Çalışılan Profil: <strong id="hubAccountName">@motordayim</strong></span>
           <button class="btn-secondary" style="padding: 0.25rem 0.6rem; font-size: 0.78rem;" onclick="openAccountModal()">Profili Değiştir</button>
         </div>
       </div>
 
-      <!-- ALL MODULES GRID -->
+      <!-- HIZLI SÖZLÜK: TERİMLER NE ANLAMA GELİYOR? -->
+      <div class="dictionary-banner">
+        <h4>📖 Hızlı Rehber: Bu Terimler Ne Anlama Geliyor? (Kafanız Karışmasın)</h4>
+        <div class="dictionary-grid">
+          <div class="dict-item">
+            <strong>🎯 Açılış Cümlesi (Kanca / Hook)</strong>
+            Reels videosunun ilk 2 saniyesinde izleyiciyi durdurup videoyu sonuna kadar izleten en vurucu açılış cümlesi.
+          </div>
+          <div class="dict-item">
+            <strong>📱 İlk 125 Karakter Kuralı</strong>
+            Instagram akışında "...daha fazla" butonuna basmadan önce ekranda görünen ve tıklamayı sağlayan ilk iki satır.
+          </div>
+          <div class="dict-item">
+            <strong>⏱️ Sahne & Çekim Planı (Beat Sheet)</strong>
+            Her cümlenin kaç saniye süreceğini ve izleyicinin sıkılmaması için nerede kamera açısının değişeceğini gösteren plan.
+          </div>
+          <div class="dict-item">
+            <strong>🔍 Patlama Çarpanı (Outlier)</strong>
+            Bir videonun, o hesabın normal izlenmesinden kaç kat daha fazla izlendiği (3x üzeri gerçek viral sinyalidir).
+          </div>
+          <div class="dict-item">
+            <strong>📣 Eyleme Çağrı (CTA)</strong>
+            Takipçiye ne yapacağını söylemek: "Yoruma MOTOR yaz", "Bunu kaydet" veya "Profilden incele" gibi net tek bir eylem.
+          </div>
+          <div class="dict-item">
+            <strong>✨ İnsanlaştırma (Humanize)</strong>
+            Yapay zeka kokan klişeleri ("dijital çağda", "çığır açan" vb.) temizleyip samimi ve doğal konuşma diline çevirme.
+          </div>
+        </div>
+      </div>
+
+      <!-- TÜM MODÜLLER -->
       <div class="hub-grid">
-        <!-- Module 1: Hook Scorer -->
+        <!-- Modül 1: Kanca Puanlayıcı -->
         <div class="hub-card" onclick="switchView('hook-view')">
           <div>
             <span class="hub-icon">🎯</span>
-            <h3 class="hub-title">Kanca (Hook) Stüdyosu</h3>
-            <p class="hub-desc">Videonun ilk 2 saniyesini 5 kritere göre puanlayın. 'Selam arkadaşlar' ve 'Kaydırmayı durdur' ölümcül hatalarını yakalayın.</p>
+            <h3 class="hub-title">Açılış Cümlesi (Kanca) Puanlayıcı</h3>
+            <p class="hub-desc">Reels videonuzun ilk 2 saniyesinde izleyiciyi ekrana kilitleyen cümlenizi test edin. 'Selam arkadaşlar' gibi izleyiciyi kaçıran hataları yakalar ve 100 üzerinden puanlar.</p>
           </div>
           <div class="hub-footer">
-            <span>Kancayı Test Et →</span>
+            <span>Açılışı Test Et →</span>
             <span class="hub-tag">/ig-reel</span>
           </div>
         </div>
 
-        <!-- Module 2: Caption Linter -->
+        <!-- Modül 2: Açıklama & Akış -->
         <div class="hub-card" onclick="switchView('caption-view')">
           <div>
             <span class="hub-icon">📱</span>
-            <h3 class="hub-title">Akış & Açıklama (125 Karakter)</h3>
-            <p class="hub-desc">Gönderi metninizin akışta '...devamı'ndan önce nasıl görüneceğini simüle edin. Güncel 5 hashtag sınırını denetleyin.</p>
+            <h3 class="hub-title">Gönderi Açıklaması & Akış Önizleme</h3>
+            <p class="hub-desc">Instagram akışında '...daha fazla' butonundan önce görünen kritik ilk 125 karakteri test edin. Açıklamanızın nasıl kesileceğini görün, 5 hashtag sınırını denetleyin.</p>
           </div>
           <div class="hub-footer">
-            <span>Simülatörü Aç →</span>
+            <span>Önizlemeyi Aç →</span>
             <span class="hub-tag">/ig-caption</span>
           </div>
         </div>
 
-        <!-- Module 3: Beat Sheet -->
+        <!-- Modül 3: Çekim & Sahne Planı -->
         <div class="hub-card" onclick="switchView('beats-view')">
           <div>
             <span class="hub-icon">⏱️</span>
-            <h3 class="hub-title">Beat Sheet (Çekim Süresi)</h3>
-            <p class="hub-desc">Reel senaryonuzu dakikada 165 kelime hızına göre saniye saniye zamanlayın. 4 saniyeden uzun durgun sahneleri bulun.</p>
+            <h3 class="hub-title">Sahne & Çekim Planı (Konuşma Süresi)</h3>
+            <p class="hub-desc">Reel senaryonuzu saniye saniye zamanlayın. Nerede kamera açısı değişmeli, nerede video durgunlaşıyor (4 saniyeyi aşan yerler) anında görün.</p>
           </div>
           <div class="hub-footer">
             <span>Süreyi Ölç →</span>
-            <span class="hub-tag">beats.py</span>
+            <span class="hub-tag">Çekim Planı</span>
           </div>
         </div>
 
-        <!-- Module 4: 26 Hooks Library -->
+        <!-- Modül 4: 26 Şablon Kataloğu -->
         <div class="hub-card" onclick="switchView('library-view')">
           <div>
             <span class="hub-icon">📚</span>
-            <h3 class="hub-title">26 Viral Kanca Kataloğu</h3>
-            <p class="hub-desc">Türkçe konuşma diline uyarlanmış 26 kanıtlanmış kanca formülü. Ekran yazıları, örnekler ve arama filtresi.</p>
+            <h3 class="hub-title">26 Kanıtlanmış Açılış Şablonu</h3>
+            <p class="hub-desc">Instagram'da en çok izlenen 26 kanca formülü. Hangi durumda ne söyleyeceğinizi ve ekrana ne yazacağınızı hazır kopyalayın.</p>
           </div>
           <div class="hub-footer">
             <span>Kataloğu Aç →</span>
-            <span class="hub-tag">hooks_tr.json</span>
+            <span class="hub-tag">26 Şablon</span>
           </div>
         </div>
 
-        <!-- Module 5: Profile Audit -->
+        <!-- Modül 5: Profil Kontrol Listesi -->
         <div class="hub-card" onclick="switchView('profile-view')">
           <div>
             <span class="hub-icon">👤</span>
-            <h3 class="hub-title">Profil 100 Puan Denetimi</h3>
-            <p class="hub-desc">İsim alanı, biyografi vaadi, sabitlenen 3 gönderi ve öne çıkanları 12 maddelik karara bağlama rubriğiyle optimize edin.</p>
+            <h3 class="hub-title">Profil 100 Puan Kontrol Listesi</h3>
+            <p class="hub-desc">Biyografinizi, isim alanınızı, sabitlenen 3 videonuzu ve öne çıkanları 12 kritik maddede inceleyip ziyaretçiyi takipçiye dönüştürün.</p>
           </div>
           <div class="hub-footer">
             <span>Profili Puanla →</span>
@@ -884,12 +966,12 @@
           </div>
         </div>
 
-        <!-- Module 6: Viral Multiple -->
+        <!-- Modül 6: Viral Video Keşfi -->
         <div class="hub-card" onclick="switchView('viral-view')">
           <div>
             <span class="hub-icon">🔍</span>
-            <h3 class="hub-title">Viral Analiz & Çarpan</h3>
-            <p class="hub-desc">Nişinizdeki videoları ham izlenmeye göre değil, hesabın kendi ortalamasına göre katlama çarpanıyla (outlier multiple) inceleyin.</p>
+            <h3 class="hub-title">Viral Video Keşfi & Patlama Çarpanı</h3>
+            <p class="hub-desc">Sektörünüzde normalden katbekat fazla izlenen videoları bulun. Bir video hesabın normal izlenmesini kaç kat katlamış ortaya çıkarın.</p>
           </div>
           <div class="hub-footer">
             <span>Kıyaslamayı Gör →</span>
@@ -897,25 +979,25 @@
           </div>
         </div>
 
-        <!-- Module 7: AI Prompt Wizard -->
+        <!-- Modül 7: Prompt Sihirbazı -->
         <div class="hub-card" onclick="switchView('prompt-view')">
           <div>
             <span class="hub-icon">🤖</span>
-            <h3 class="hub-title">AI Prompt Sihirbazı</h3>
-            <p class="hub-desc">Aktif hesabınızın sektörü, kitle bilgisi ve ses tonuna göre Claude veya ChatGPT için en kusursuz Türkçe promptları üretin.</p>
+            <h3 class="hub-title">Yapay Zeka Komut (Prompt) Sihirbazı</h3>
+            <p class="hub-desc">Hesabınızın tarzına ve sektörüne göre ChatGPT veya Claude'a ne söylemeniz gerektiğini tek tıkla hazır bir komut olarak üretin.</p>
           </div>
           <div class="hub-footer">
-            <span>Prompt Oluştur →</span>
+            <span>Komut Oluştur →</span>
             <span class="hub-tag">Prompt Sihirbazı</span>
           </div>
         </div>
 
-        <!-- Module 8: Multi-Account Management -->
+        <!-- Modül 8: Çoklu Hesap -->
         <div class="hub-card" onclick="openAccountModal()">
           <div>
             <span class="hub-icon">👥</span>
-            <h3 class="hub-title">10 Hesap Yönetimi</h3>
-            <p class="hub-desc">Şifre gerekmeden 10 farklı Instagram hesabını ekleyin; hesaplar arasında tek tıkla geçiş yapıp içerik kurgulayın.</p>
+            <h3 class="hub-title">Çoklu Hesap Yöneticisi (10 Profil)</h3>
+            <p class="hub-desc">Şifresiz, sadece kullanıcı adı veya link girerek 10 farklı hesabınızı kaydedin ve aralarında tek tıkla geçiş yapın.</p>
           </div>
           <div class="hub-footer">
             <span>Hesapları Yönet →</span>
@@ -925,35 +1007,40 @@
       </div>
     </section>
 
-    <!-- 2. MODULE: HOOK SCORER -->
+    <!-- 2. MODÜL: AÇILIŞ CÜMLESİ (KANCA) PUANLAYICI -->
     <section id="hook-view" class="view-pane">
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🎯 Kanca (Hook) Puanlayıcı</h2>
-            <p class="card-desc">Videonun ilk 2 saniyesinde söyleyeceğiniz cümleyi yazın. Sistem 5 parametrede analiz eder.</p>
+            <h2 class="card-title">🎯 Açılış Cümlesi (Kanca) Puanlayıcı</h2>
+            <p class="card-desc">Reels videonuzun ilk 2 saniyesinde söyleyeceğiniz ilk cümleyi yazın. Sistem 5 temel kritere göre analiz edip eksikleri söyler.</p>
           </div>
 
-          <label for="hookInput">İlk Cümle (Kanca):</label>
-          <textarea id="hookInput" placeholder="Örn: 18.000 TL, tek bir eksik sözleşme maddesinin bana maliyetidir..."></textarea>
+          <label for="hookInput">İlk Cümle (Açılış):</label>
+          <textarea id="hookInput" placeholder="Örn: 18.000 TL, sözleşmedeki tek bir eksik cümlenin bana maliyeti..."></textarea>
           
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;">
             <button class="btn-secondary" onclick="loadSampleHook(1)">Örnek 1 (Maliyet İtirafı)</button>
-            <button class="btn-secondary" onclick="loadSampleHook(2)">Örnek 2 (Zayıf Selamlama)</button>
+            <button class="btn-secondary" onclick="loadSampleHook(2)">Örnek 2 (İzleyici Kaçıran Selamlama)</button>
             <button class="btn-secondary" onclick="loadSampleHook(3)">Örnek 3 (Kimse Söylemiyor)</button>
           </div>
 
-          <button class="btn-action" onclick="analyzeHook()">Kancayı Puanla & Test Et</button>
+          <button class="btn-action" onclick="analyzeHook()">Açılış Cümlesini Puanla & Test Et</button>
 
           <div id="dealbreakerAlert" class="dealbreaker-banner">
-            ⚠️ <strong>ÖLÜMCÜL HATA (DEALBREAKER):</strong> <span id="dealbreakerMsg"></span>
+            🚨 <strong>DİKKAT (İzleyiciyi Kaçıran Hata):</strong> <span id="dealbreakerMsg"></span>
+          </div>
+
+          <div class="explainer-card">
+            <strong>💡 Bir açılış cümlesi neden bu kadar önemlidir?</strong><br>
+            İzleyiciler Reels izlerken bir videoda kalıp kalmayacağına ilk <strong>1.5 - 2 saniyede</strong> karar verir. "Selam arkadaşlar bugün sizlere..." dediğiniz anda video kaydırılır. İlk cümlede doğrudan bir rakam, bir itiraf veya merak uyandıran bir kayıp söylemek izleyiciyi videoda tutar.
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">📊 Analiz ve Puan Tablosu</h2>
-            <p class="card-desc">70 puan üzeri GÜÇLÜ (STRONG), 50-70 ORTA, 50 altı ZAYIF (WEAK).</p>
+            <h2 class="card-title">📊 Detaylı Puan ve İyileştirme Rehberi</h2>
+            <p class="card-desc">70 puan ve üzeri: Çok Güçlü (Hemen Çekilebilir), 50-70: Geliştirilebilir, 50 altı: Zayıf (İzleyici kaydırıp geçer).</p>
           </div>
 
           <div class="score-box">
@@ -965,23 +1052,38 @@
 
           <div class="checks-list">
             <div class="check-row">
-              <span class="check-title">📏 Uzunluk (5-12 Kelime)</span>
+              <div>
+                <span class="check-title">📏 Kelime Sayısı (5-12 Kelime İdeal)</span>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Çok kısa olursa merak uyandırmaz, çok uzun olursa izleyici okumadan geçer.</div>
+              </div>
               <span class="check-val" id="lenScore">--</span>
             </div>
             <div class="check-row">
-              <span class="check-title">💎 Somutluk (Rakam, TL, İsim)</span>
+              <div>
+                <span class="check-title">💎 Somut Detay (Fiyat, Rakam, Süre)</span>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">'18.000 TL', '30 gün' gibi somut rakamlar güven verir.</div>
+              </div>
               <span class="check-val" id="specScore">--</span>
             </div>
             <div class="check-row">
-              <span class="check-title">⚡ Gerilim / Risk (Stakes)</span>
+              <div>
+                <span class="check-title">⚡ Kaybetme Riski & Çıkar (Stakes)</span>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">İzleyici 'Bunu izlemezsem ne kaybederim?' sorusunu hissetmeli.</div>
+              </div>
               <span class="check-val" id="stakeScore">--</span>
             </div>
             <div class="check-row">
-              <span class="check-title">🎯 Başa Yerleşim (Frontload)</span>
+              <div>
+                <span class="check-title">🎯 En Can Alıcı Kelimeyi Başa Koyma</span>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Girişteki gereksiz lafları atıp vurucu kelimeyle başlayın.</div>
+              </div>
               <span class="check-val" id="frontScore">--</span>
             </div>
             <div class="check-row">
-              <span class="check-title">👤 İzleyiciye Hitap (Address)</span>
+              <div>
+                <span class="check-title">👤 Doğrudan İzleyiciye Seslenme</span>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">'Sen', 'siz' veya 'bırakın' gibi doğrudan kişiye hitap eden ifadeler.</div>
+              </div>
               <span class="check-val" id="addrScore">--</span>
             </div>
           </div>
@@ -989,29 +1091,38 @@
       </div>
     </section>
 
-    <!-- 3. MODULE: CAPTION LINTER -->
+    <!-- 3. MODÜL: GÖNDERİ AÇIKLAMASI & AKIŞ ÖNİZLEME -->
     <section id="caption-view" class="view-pane">
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">✍️ Açıklama (Caption) Linter'ı</h2>
-            <p class="card-desc">Instagram gönderi metnini yazın. Akışta nasıl kesileceğini ve güncel 5 hashtag kuralını görün.</p>
+            <h2 class="card-title">✍️ Gönderi Açıklaması & Akış Denetleyicisi</h2>
+            <p class="card-desc">Instagram gönderinizin altına yazacağınız açıklamayı yapıştırın. Akışta nasıl kesileceğini ve güncel kurallara uygunluğunu kontrol edin.</p>
           </div>
 
           <label for="captionInput">Gönderi Açıklama Metni:</label>
-          <textarea id="captionInput" style="min-height: 180px;" placeholder="Gönderi açıklamasını buraya yapıştır..." oninput="analyzeCaption()"></textarea>
+          <textarea id="captionInput" style="min-height: 180px;" placeholder="Gönderi açıklamasını buraya yapıştırın..." oninput="analyzeCaption()"></textarea>
 
           <div style="margin-top: 1rem;" class="checks-list">
             <div class="check-row">
-              <span>Toplam Karakter:</span>
+              <div>
+                <strong>Toplam Karakter:</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">İdeal açıklama 300 - 800 karakter arasıdır.</div>
+              </div>
               <span id="capChars" class="check-val">0 / 2200</span>
             </div>
             <div class="check-row">
-              <span>Hashtag Sayısı (Max 5 Kuralı):</span>
+              <div>
+                <strong>Hashtag Sayısı (En Fazla 5 Kuralı):</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Instagram artık 30 değil, 3-5 odaklı etiket istiyor.</div>
+              </div>
               <span id="capTags" class="check-val">0</span>
             </div>
             <div class="check-row">
-              <span>Eyleme Çağrı (CTA / Ask):</span>
+              <div>
+                <strong>Eyleme Çağrı (CTA):</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Takipçiye ne yapacağı söylendi mi? (Yoruma yaz, kaydet vb.)</div>
+              </div>
               <span id="capAsk" class="check-val">Yok</span>
             </div>
           </div>
@@ -1019,8 +1130,8 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">📱 Akışta Nasıl Görünecek?</h2>
-            <p class="card-desc">Kullanıcı akışta aşağı kaydırırken '...devamı'ndan önce sadece bu pencereyi görür:</p>
+            <h2 class="card-title">📱 Akışta '...devamı'ndan Önce Nasıl Görünecek?</h2>
+            <p class="card-desc">Kullanıcılar akışta gezinirken tıklama yapmadan önce sadece bu ilk pencereyi görür:</p>
           </div>
 
           <div class="ig-feed-mockup">
@@ -1034,19 +1145,24 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
-            💡 <strong>Algoritma Kuralı:</strong> İnsanların %85'i '...devamı'na basmaz. Eğer kanca ve merak unsuru ilk 125 karakterde değilse açıklama okunmadan geçilir.
+          <div class="explainer-card">
+            <strong>💡 Instagram Algoritması & Açıklama İpuçları:</strong>
+            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem;">
+              <li><strong>İlk 125 Karakter Altındır:</strong> İnsanların %85'i '...devamı'na basmaz. Merak uyandıran detayı veya 'Yoruma DETAY yaz' gibi çağrıyı ilk 1-2 satırda verin.</li>
+              <li><strong>5 Hashtag Dönemi:</strong> Konuyla doğrudan ilgili en fazla 3-5 hashtag yeterlidir. #kesfet #fyp gibi genel etiketler işe yaramaz.</li>
+              <li><strong>Arama Kelimeleri (SEO):</strong> İnsanların arama çubuğuna yazacağı kelimeleri metnin içinde doğal cümleler halinde geçirin.</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. MODULE: BEAT SHEET -->
+    <!-- 4. MODÜL: SAHNE & ÇEKİM PLANI (KONUŞMA SÜRESİ) -->
     <section id="beats-view" class="view-pane">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">⏱️ Reel Beat Sheet (Konuşma & Çekim Zamanlayıcı)</h2>
-          <p class="card-desc">Reel senaryonuzu yapıştırın. Dakikada 165 kelime konuşma hızına göre saniye saniye çekim planını ve 4 saniyeden uzun durgun sahneleri görün.</p>
+          <h2 class="card-title">⏱️ Sahne & Çekim Planı (Konuşma Süresi Zamanlayıcı)</h2>
+          <p class="card-desc">Reel senaryonuzu her cümle ayrı satırda olacak şekilde yapıştırın. Dakikadaki konuşma hızınıza göre her cümlenin kaç saniye süreceğini ve nerede kamera açısı değişmesi gerektiğini görün.</p>
         </div>
 
         <div class="grid-2">
@@ -1060,21 +1176,26 @@ Onay bir his, teslimat ise takvimdir.
             
             <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
               <div>
-                <label for="wpmRate">Konuşma Hızı (Kelime/Dk):</label>
+                <label for="wpmRate">Konuşma Hızınız:</label>
                 <select id="wpmRate" style="width: auto;">
-                  <option value="150">150 (Sakin / Ağırbaşlı)</option>
-                  <option value="165" selected>165 (Normal Konuşma)</option>
-                  <option value="185">185 (Hızlı / Enerjik)</option>
+                  <option value="150">150 Kelime/Dk (Sakin / Ağırbaşlı)</option>
+                  <option value="165" selected>165 Kelime/Dk (Normal Türkçe Konuşma Hızı)</option>
+                  <option value="185">185 Kelime/Dk (Hızlı / Enerjik / Dinamik)</option>
                 </select>
               </div>
-              <button class="btn-action" style="margin-top: 1.2rem;" onclick="generateBeatSheet()">Hesapla</button>
+              <button class="btn-action" style="margin-top: 1.2rem;" onclick="generateBeatSheet()">Süreyi Hesapla</button>
+            </div>
+
+            <div class="explainer-card">
+              <strong>💡 Neden 4 saniyeden uzun durgun sahne olmamalı?</strong><br>
+              Sosyal medyada dikkat süresi çok kısadır. Ekranda 4 saniyeden uzun süre aynı açı ve donuk bir konuşma olursa izleyici odağını kaybeder. Her 3-4 saniyede bir kamera açısını değiştirmek, yakınlaşmak (zoom in) veya ekrana 2-3 kelimelik bir yazı kartı koymak izlenme süresini ciddi oranda artırır.
             </div>
           </div>
 
           <div>
-            <label>Zamanlanmış Çekim Çizelgesi:</label>
+            <label>Zamanlanmış Çekim Çizelgesi & Sahne Uyarıları:</label>
             <div id="beatsOutput" style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; min-height: 250px; overflow-y: auto;">
-              <p style="padding: 1.5rem; color: var(--text-muted); text-align: center;">Senaryonuzu girip 'Hesapla' butonuna basın.</p>
+              <p style="padding: 1.5rem; color: var(--text-muted); text-align: center;">Senaryonuzu girip 'Süreyi Hesapla' butonuna basın.</p>
             </div>
           </div>
         </div>
@@ -1118,79 +1239,90 @@ Onay bir his, teslimat ise takvimdir.
                 <span class="score-number" id="profScoreDisplay" style="font-size: 2.2rem;">0</span>
               </div>
               <div class="score-status" id="profStatus">BAŞLANGIÇ</div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
-                Çoğu hesap ilk incelemede 30-40 puanda kalır. İsim alanı (12p), Biyografi 1. satır (12p) ve Sabitlenen 3 gönderi (10p) en yüksek puana sahiptir.
-              </p>
+              <div class="explainer-card" style="text-align: left; margin-top: 1.25rem;">
+                <strong>💡 Profil neden bir vitrin değildir?</strong><br>
+                Ziyaretçiler profilinize rastgele girip gezmez; genellikle bir Reel videonuzu beğenip gelirler. O anda kafalarında tek bir soru vardır: <em>"Burada bundan daha fazlası var mı ve bu hesap benim işime yarar mı?"</em> Bu 12 maddeyi tamamladığınızda profilinizin takipçiye dönüşüm oranı 3 katına çıkar.
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7. MODULE: VIRAL MULTIPLE -->
+    <!-- 6. MODÜL: VİRAL VİDEO KEŞFİ & PATLAMA ÇARPANI -->
     <section id="viral-view" class="view-pane">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">🔍 Viral Kıyaslama & Outlier Multiple</h2>
-          <p class="card-desc">Ham izlenme kanıt değildir. Bir videonun viral olup olmadığını hesabın ortalama izlenmesine göre katlama çarpanı belirler.</p>
+          <h2 class="card-title">🔍 Viral Video Keşfi: Bir Video Normal İzlenmeyi Kaç Kat Katladı?</h2>
+          <p class="card-desc">Ham izlenme sayısı yanıltıcıdır. 2 milyon takipçili bir hesabın 300.000 izlenmesi sıradan bir gündür. Ancak 3.000 takipçili bir hesabın 300.000 izlenmesi, kopyalanabilir büyük bir viral formüldür.</p>
         </div>
 
         <div class="checks-list" style="margin-bottom: 1.5rem;">
           <div class="check-row">
             <div>
-              <strong>15.8x Katlama</strong> · <em>"Kimse size ilk 1000 km'de kaza yapma ihtimalinizin %70 olduğunu söylemiyor"</em>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">285.000 izlenme (Medyan: 18.000) · #3 Kimse Söylemiyor</div>
+              <strong style="color: var(--success); font-size: 1rem;">🔥 15.8 Kat Patlama (Viral)</strong> · <em>"Kimse size ilk 1000 km'de kaza yapma ihtimalinizin %70 olduğunu söylemiyor"</em>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem;">285.000 izlenme (Hesabın Normal Medyanı: 18.000) · #3 Kimse Söylemiyor Şablonu</div>
             </div>
-            <span class="hub-tag" style="color: var(--success); font-weight:700;">GÜÇLÜ ANOMALİ</span>
+            <span class="hub-tag" style="color: var(--success); font-weight:700;">GERÇEK VİRAL</span>
           </div>
           <div class="check-row">
             <div>
-              <strong>14.0x Katlama</strong> · <em>"Bu 1.500 TL'lik aparat beni 30.000 TL'lik egzoz cezasından kurtardı"</em>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">168.000 izlenme (Medyan: 12.000) · #1 Maliyet İtirafı</div>
+              <strong style="color: var(--success); font-size: 1rem;">🔥 14.0 Kat Patlama (Viral)</strong> · <em>"Bu 1.500 TL'lik aparat beni 30.000 TL'lik egzoz cezasından kurtardı"</em>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem;">168.000 izlenme (Hesabın Normal Medyanı: 12.000) · #1 Maliyet İtirafı Şablonu</div>
             </div>
-            <span class="hub-tag" style="color: var(--success); font-weight:700;">GÜÇLÜ ANOMALİ</span>
+            <span class="hub-tag" style="color: var(--success); font-weight:700;">GERÇEK VİRAL</span>
           </div>
           <div class="check-row">
             <div>
-              <strong>1.3x Sıradan</strong> · <em>"Bugün arkadaşlarla Şile tarafına kahve içmeye sürüyoruz"</em>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">24.000 izlenme (Medyan: 18.000) · Formülsüz Günlük Tutma</div>
+              <strong style="color: var(--danger); font-size: 1rem;">😴 1.3 Kat Sıradan</strong> · <em>"Bugün arkadaşlarla Şile tarafına kahve içmeye sürüyoruz"</em>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem;">24.000 izlenme (Hesabın Normal Medyanı: 18.000) · Formülsüz Günlük Vlog</div>
             </div>
-            <span class="hub-tag" style="color: var(--danger); font-weight:700;">DÜŞÜK KALDI</span>
+            <span class="hub-tag" style="color: var(--danger); font-weight:700;">SIRADAN TRAFİK</span>
           </div>
         </div>
 
-        <p style="font-size: 0.9rem; color: var(--text-muted);">
-          💡 <strong>Araştırma Tavsiyesi:</strong> Nişinizde 3x üzerinde patlayan videoları toplayıp 'swipe file' oluşturun. Bu kancaları kendi sektörünüze uyarlayın.
-        </p>
+        <div class="explainer-card">
+          <strong>💡 Patlama Çarpanı Nasıl Hesaplanır ve Neden Önemlidir?</strong><br>
+          Bir videonun izlenme sayısını o hesabın son 12 videosunun ortanca (medyan) izlenmesine bölün:<br>
+          • <strong>3 katı (3x) ve üzeri:</strong> Tebrikler, kopyalanabilir gerçek bir viral formül buldunuz. Bu videonun açılış cümlesini, video uzunluğunu ve ilk karesini hemen kendi sektörünüze uyarlayın.<br>
+          • <strong>1.5 katı ve altı:</strong> Hesabın normal günlük trafiğidir; izlenme sayısı yüksek görünse bile özel bir taktik öğretmez.
+        </div>
       </div>
     </section>
 
-    <!-- 8. MODULE: AI PROMPT WIZARD -->
+    <!-- 7. MODÜL: YAPAY ZEKA KOMUT (PROMPT) SİHİRBAZI -->
     <section id="prompt-view" class="view-pane">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">🤖 Claude & ChatGPT İçin Optimize Prompt Üretici</h2>
-          <p class="card-desc">Aktif hesabınızın bilgileriyle otomatik doldurulmuş, yapay zekaya verilecek en kusursuz Türkçe prompt.</p>
+          <h2 class="card-title">🤖 Yapay Zeka İçin Hazır Komut (Prompt) Sihirbazı</h2>
+          <p class="card-desc">ChatGPT veya Claude'a sıradan bir soru sormak yerine, seçtiğiniz hesabın konusuna ve 26 kanca kuralına göre hazırlanmış profesyonel bir komut gönderin.</p>
         </div>
 
         <div class="grid-2">
           <div>
-            <label for="promptTopic">Reel veya İçerik Konusu:</label>
+            <label for="promptTopic">Reel / Video Konusu:</label>
             <input type="text" id="promptTopic" placeholder="Örn: 250cc motorla uzun yola çıkılır mı?">
 
-            <label for="promptNiche" style="margin-top: 1rem;">Hedef Kitle / Niş:</label>
-            <input type="text" id="promptNiche" placeholder="Örn: Motosiklet kullanıcıları">
+            <label for="promptNiche" style="margin-top: 1rem;">Hitap Ettiğiniz Kitle / Sektör:</label>
+            <input type="text" id="promptNiche" placeholder="Örn: Motosiklet kullanıcıları & yeni başlayanlar">
 
-            <label for="promptCTA" style="margin-top: 1rem;">Eyleme Çağrı (CTA Kelimesi):</label>
-            <input type="text" id="promptCTA" placeholder="Örn: ROTA">
+            <label for="promptCTA" style="margin-top: 1rem;">Eyleme Çağrı Kelimesi (Yoruma ne yazsınlar?):</label>
+            <input type="text" id="promptCTA" placeholder="Örn: ROTA veya REHBER">
 
-            <button class="btn-action" onclick="buildAIPrompt()">Promptu Oluştur</button>
+            <button class="btn-action" onclick="buildAIPrompt()">Hazır Komutu Oluştur</button>
+
+            <div class="explainer-card">
+              <strong>💡 Nasıl Kullanılır?</strong><br>
+              1. Yukarıdaki alanları doldurup <strong>"Hazır Komutu Oluştur"</strong> butonuna basın.<br>
+              2. Oluşan komutu kopyalayıp doğrudan bu sohbete, ChatGPT'ye veya Claude'a yapıştırın.<br>
+              3. Yapay zeka size 3 alternatif kanca, saniyelik sahne planı ve ilk 125 karakteri vurucu bir gönderi açıklaması hazırlasın.
+            </div>
           </div>
 
           <div>
-            <label>Yapay Zekaya Gönderilecek Hazır Prompt:</label>
-            <textarea id="promptOutput" style="min-height: 220px;" readonly placeholder="Prompt burada oluşacak..."></textarea>
-            <button class="btn-secondary" style="margin-top: 0.5rem;" onclick="copyPrompt()">📋 Panoya Kopyala</button>
+            <label>Yapay Zekaya Gönderilecek Hazır Komut Metni:</label>
+            <textarea id="promptOutput" style="min-height: 240px;" readonly placeholder="Komut metni burada oluşacak..."></textarea>
+            <button class="btn-secondary" style="margin-top: 0.5rem;" onclick="copyPrompt()">📋 Komutu Kopyala</button>
           </div>
         </div>
       </div>
@@ -1206,7 +1338,7 @@ Onay bir his, teslimat ise takvimdir.
       </div>
 
       <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-        Hiçbir şifre gerekmez. Sadece kullanıcı adı veya link girerek istediğiniz hesabı ekleyin ve aralarında tek tıkla geçiş yapın.
+        Şifre veya giriş bilgisi asla istenmez. Sadece Instagram kullanıcı adını (@kullaniciadi) veya profil linkini girerek 10 hesaba kadar ekleyebilir, aralarında tek tıkla geçiş yapabilirsiniz.
       </p>
 
       <div class="accounts-list" id="accountsListContainer">
@@ -1508,13 +1640,13 @@ Onay bir his, teslimat ise takvimdir.
 
       if (/^(kaydırmayı durdur|kaydırma|geçme|dur|durun)/i.test(lower)) {
         dealAlert.style.display = 'block';
-        dealMsg.textContent = "Açılışta 'kaydırmayı durdur' demek, dikkat çekmeyi hak etmediğinizin kanıtıdır.";
+        dealMsg.textContent = "Açılışta 'kaydırmayı durdur' veya 'durun' demek izleyicide emir alma hissi yaratır. İnsanlar emir almayı sevmez; dikkat çekmek için önce merak veya değer sunun.";
       } else if (/^(selam|merhaba|herkese merhaba|selamlar|selam arkadaşlar)/i.test(lower)) {
         dealAlert.style.display = 'block';
-        dealMsg.textContent = "Selamlama ile başlanmaz. Kimse Instagram akışına selam almak için girmez.";
+        dealMsg.textContent = "Selamlaşma ile başlanmaz ('Selam arkadaşlar', 'Herkese merhaba'). İnsanlar Instagram akışına selam almak için değil; eğlenmek veya öğrenmek için girer. Giriş selamsız ve direkt olmalı.";
       } else if (/(bu videoda|bugünkü videoda|size göstereceğim|nasıl yapıldığını anlatacağım)/i.test(lower)) {
         dealAlert.style.display = 'block';
-        dealMsg.textContent = "Giriş laf kalabalığı. Doğrudan sonuca ve kancaya girin.";
+        dealMsg.textContent = "Giriş laf kalabalığı ('Bu videoda sizlere...', 'Bugün anlatacağım'). İlk 2 saniyenizi ne yapacağınızı söyleyerek harcamayın, doğrudan konunun en can alıcı yerine girin.";
       }
 
       // 1. Length (5-12 words)
@@ -1560,13 +1692,13 @@ Onay bir his, teslimat ise takvimdir.
       circle.style.background = `conic-gradient(${total >= 70 ? 'var(--success)' : (total >= 50 ? 'var(--warning)' : 'var(--danger)')} ${total}%, rgba(255,255,255,0.05) ${total}%)`;
 
       if (total >= 70) {
-        verdict.textContent = "GÜÇLÜ KANCA (STRONG)";
+        verdict.textContent = "🚀 ÇOK GÜÇLÜ AÇILIŞ (Hemen Çekilebilir)";
         verdict.style.color = "var(--success)";
       } else if (total >= 50) {
-        verdict.textContent = "ORTA (GELİŞTİRİLEBİLİR)";
+        verdict.textContent = "⚠️ GELİŞTİRİLEBİLİR (Biraz daha somutlaştırın)";
         verdict.style.color = "var(--warning)";
       } else {
-        verdict.textContent = "ZAYIF KANCA (WEAK)";
+        verdict.textContent = "❌ ZAYIF AÇILIŞ (İzleyici kaydırıp geçer)";
         verdict.style.color = "var(--danger)";
       }
     }
