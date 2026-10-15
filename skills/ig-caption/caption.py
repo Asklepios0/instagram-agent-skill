@@ -43,19 +43,20 @@ EMOJI_RE = re.compile(r"[\U0001F300-\U0001FAFF☀-➿←-⇿️]")
 CONCRETE_RE = re.compile(r"\$\s?\d|\b\d[\d,.]*\b|(?<!^)\b[A-Z][a-z]{2,}\b", re.MULTILINE)
 
 ASKS = [
-    (re.compile(r"(?i)\bcomment (?:the word |\")?[A-Z0-9]{2,}\b"), "comment a keyword"),
-    (re.compile(r"(?i)\b(?:dm|message) me\b"), "DM me"),
-    (re.compile(r"(?i)\bsave (?:this|it)\b"), "save this"),
-    (re.compile(r"(?i)\bshare (?:this|it)\b"), "share this"),
-    (re.compile(r"(?i)\bfollow (?:me|for)\b"), "follow"),
-    (re.compile(r"(?i)\blink in (?:my )?bio\b"), "link in bio"),
-    (re.compile(r"(?i)\b(?:swipe|tap) (?:through|left|right|for|to)\b"), "swipe or tap"),
-    (re.compile(r"(?i)\btell me\b|\bwhat would you\b|\bwhich one\b"), "answer a question"),
+    (re.compile(r"(?i)\bcomment (?:the word |\")?[A-Z0-9]{2,}\b|\b(?:yoruma|yorumlara|yorumda)\s+(?:[^\s.]+\s+)?(?:yaz|bırak|at|yazın|bırakın|atın)\b|\byorum\s+(?:yap|yapın)\b"), "comment a keyword"),
+    (re.compile(r"(?i)\b(?:dm|message) me\b|\b(?:bana\s+)?(?:dm|mesaj)\s*(?:at|gönder|yaz|atın|gönderin|yazın)\b"), "DM me"),
+    (re.compile(r"(?i)\bsave (?:this|it)\b|\b(?:bunu\s+)?kaydet(?:in)?\b"), "save this"),
+    (re.compile(r"(?i)\bshare (?:this|it)\b|\b(?:bunu\s+)?paylaş(?:ın)?\b"), "share this"),
+    (re.compile(r"(?i)\bfollow (?:me|for)\b|\btakip\s+et(?:in)?\b"), "follow"),
+    (re.compile(r"(?i)\blink in (?:my )?bio\b|\b(?:profildeki|biyografideki|bio['’]daki)\s+link(?:e|te)?\b"), "link in bio"),
+    (re.compile(r"(?i)\b(?:swipe|tap) (?:through|left|right|for|to)\b|\b(?:yana\s+)?kaydır(?:ın)?\b"), "swipe or tap"),
+    (re.compile(r"(?i)\btell me\b|\bwhat would you\b|\bwhich one\b|\bsen ne düşünüyorsun\b|\bfikrin(?:iz)? ne\b|\bhangisi\b"), "answer a question"),
 ]
 
 FILLER_TAGS = {"#viral", "#fyp", "#explore", "#explorepage", "#foryou", "#foryoupage",
                "#trending", "#instagood", "#love", "#follow", "#like4like", "#reels",
-               "#reelsinstagram", "#viralreels", "#instadaily"}
+               "#reelsinstagram", "#viralreels", "#instadaily",
+               "#kesfet", "#keşfet", "#kesfetteyiz", "#keşfetteyiz", "#öneçıkar", "#gündem"}
 
 
 def visible_window(text, cut):

@@ -36,34 +36,38 @@ import re
 import statistics
 import sys
 
-WORD_RE = re.compile(r"[A-Za-z0-9$%'’-]+")
+WORD_RE = re.compile(r"[\w$%'’₺-]+", re.UNICODE)
 NUMBER_RE = re.compile(
-    r"\$\s?\d[\d,]*(?:\.\d+)?"                       # money, whole
+    r"(?:\$|₺)\s?\d[\d,]*(?:\.\d+)?"                       # money, whole
     r"|\b\d[\d,]*(?:\.\d+)?\s?"                      # a figure, with or
-    r"(?:%|k\b|x\b|hrs?\b|hours?\b|mins?\b|minutes?\b"  # without a unit
-    r"|days?\b|weeks?\b|months?\b|years?\b)?",
+    r"(?:%|k\b|x\b|tl\b|lira\b|hrs?\b|hours?\b|mins?\b|minutes?\b|dk\b|dakika\b"  # without a unit
+    r"|saat\b|gün\b|hafta\b|ay\b|yıl\b|sene\b|days?\b|weeks?\b|months?\b|years?\b)?",
     re.IGNORECASE)
-PROPER_RE = re.compile(r"(?<!^)\b[A-Z][a-z]{2,}\b")
+PROPER_RE = re.compile(r"(?<!^)\b[A-ZÇĞİÖŞÜ][a-zçğıöşü]{2,}\b")
 HASHTAG_RE = re.compile(r"(?:^|\s)#\w+")
 EMOJI_RE = re.compile(r"[\U0001F300-\U0001FAFF☀-➿]")
 
-# Spoken hooks say their numbers out loud. "Zero dollars" and "twenty grand"
-# are as concrete as "$0" and "$20,000", and counting only digits missed them.
-# "one" and "first" are deliberately absent: they are filler far more often
-# than they are a quantity.
+# Spoken hooks say their numbers out loud.
 SPOKEN_NUMBERS = {
     "zero", "two", "three", "four", "five", "six", "seven", "eight", "nine",
     "ten", "eleven", "twelve", "fifteen", "twenty", "thirty", "forty", "fifty",
     "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million",
     "billion", "dozen", "half", "twice", "triple",
+    # Türkçe sayılar
+    "sıfır", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz",
+    "on", "onbir", "oniki", "onüç", "ondört", "onbeş", "yirmi", "otuz", "kırk", "elli",
+    "altmış", "yetmiş", "seksen", "doksan", "yüz", "bin", "milyon", "milyar",
+    "yarım", "çeyrek", "katı", "defa", "kere",
 }
 MONEY_WORDS = {
     "dollars", "dollar", "bucks", "grand", "percent", "cents",
     "millionaire", "billionaire", "revenue", "profit", "salary", "rent",
+    # Türkçe para / finans
+    "tl", "lira", "dolar", "euro", "kuruş", "maaş", "kira", "ciro", "kazanç",
+    "kâr", "kar", "gelir", "bütçe", "para", "fiyat", "ücret", "zam", "zarar",
 }
 
-# Words that put something on the line. A hook with none of these is a
-# statement; a hook with one is a reason to keep watching.
+# Words that put something on the line.
 STAKES = {
     "stop", "never", "wrong", "mistake", "mistakes", "lost", "lose", "losing",
     "cost", "costs", "broke", "broken", "failed", "failure", "fail", "nobody",
@@ -76,6 +80,12 @@ STAKES = {
     "before", "until", "instead", "but", "except", "unless", "problem",
     "risk", "danger", "warning", "regret", "wish", "should", "shouldn't",
     "still", "already", "only", "without", "versus", "vs", "actually",
+    # Türkçe gerilim / risk kelimeleri
+    "bırak", "bırakın", "asla", "yanlış", "hata", "hatalar", "kaybettim", "kaybettik",
+    "zarar", "maliyet", "batırdım", "battı", "iflas", "kimse", "hiç", "yok", "değil",
+    "kovuldum", "sildim", "iptal", "yasak", "yalan", "yalanlar", "gerçek", "gerçekler",
+    "gizli", "çaldım", "ceza", "tehlike", "uyarı", "pişman", "pişmanlık", "keşke",
+    "sadece", "aslında", "sorun", "risk", "bedava", "ücretsiz", "tuzak", "çöpe", "çöp",
 }
 
 # Openers that spend the first second saying nothing.
@@ -86,6 +96,11 @@ WEAK_OPENERS = [
     "have you", "did you", "do you", "are you", "in this", "in today",
     "the thing", "a lot", "there is", "there are", "this is", "it is",
     "as a", "when it", "if you've", "you know",
+    # Türkçe zayıf açılışlar
+    "selam", "merhaba", "arkadaşlar", "dostlar", "evet", "bugün", "aslında",
+    "şey", "yani", "dürüst", "bakın", "dinleyin", "bu videoda", "sizlere",
+    "birçoğunuz", "biliyor musunuz", "bunu biliyor muydunuz", "şöyle ki", "şimdi",
+    "herkese merhaba", "selamlar",
 ]
 
 # Imperatives that earn the front position.
@@ -93,19 +108,22 @@ IMPERATIVES = {
     "stop", "steal", "copy", "delete", "try", "watch", "read", "save",
     "use", "build", "make", "write", "send", "take", "start", "quit",
     "never", "always", "don't", "dont", "do", "put", "run", "check",
+    # Türkçe emirler
+    "bırak", "bırakın", "çal", "kopyala", "sil", "dene", "izle", "oku", "kaydet",
+    "kullan", "kur", "yap", "yaz", "gönder", "başla", "sakın", "asla", "kontrol",
 }
 
 DEALBREAKERS = [
-    (re.compile(r"(?i)^\s*(?:stop scrolling|don'?t scroll)"),
-     "Opens with \"stop scrolling\". Asking for attention proves you have not earned it."),
-    (re.compile(r"(?i)\b(?:in (?:this|today'?s) (?:video|reel)|i'?m going to show you|i'?ll show you how)\b"),
-     "Video preamble. Delete it and open on the payoff."),
-    (re.compile(r"(?i)^\s*(?:hey |hi |what'?s up |welcome )"),
-     "Greeting. Nobody came to the feed to be greeted."),
+    (re.compile(r"(?i)^\s*(?:stop scrolling|don'?t scroll|kaydırmayı durdur|kaydırma|geçme|durun|dur)"),
+     "Açılışta 'kaydırmayı durdur' demek, dikkat çekmeyi hak etmediğinizin kanıtıdır."),
+    (re.compile(r"(?i)\b(?:in (?:this|today'?s) (?:video|reel)|i'?m going to show you|i'?ll show you how|bu videoda|bugünkü videoda|size göstereceğim|nasıl yapıldığını anlatacağım)\b"),
+     "Video girişi laf kalabalığı. Doğrudan sonuca ve kancaya girin."),
+    (re.compile(r"(?i)^\s*(?:hey |hi |what'?s up |welcome |selam |merhaba |herkese merhaba |selamlar |selam arkadaşlar )"),
+     "Selamlama ile başlanmaz. Kimse Instagram akışına selam almak için girmez."),
     (HASHTAG_RE,
-     "Hashtag in the hook. Hashtags belong at the bottom of the caption, if anywhere."),
+     "Kancada hashtag var. Hashtag'ler kancada değil, açıklamanın en altında olmalıdır."),
     (EMOJI_RE,
-     "Emoji in the hook. On-screen text at hook size has room for words or for an emoji, not both."),
+     "Kancada emoji var. Kanca boyutundaki ekran yazısı ya kelimeler içindir ya emoji içindir, ikisine birden yer yoktur."),
 ]
 
 
@@ -153,7 +171,7 @@ def check_stakes(text):
     w = [x.lower().strip("'’") for x in words(text)]
     hits = [x for x in w if x in STAKES]
     markers = sorted(set(hits))
-    if re.search(r"\$\s?\d", text):
+    if re.search(r"(\$|₺)\s?\d|\b\d+\s*(?:tl|lira|dolar|euro)\b", text, re.IGNORECASE):
         markers.append("a price")
     n = len(markers)
     score = {0: 20.0, 1: 70.0}.get(n, 100.0)
@@ -201,11 +219,11 @@ def check_address(text):
     """Aimed at one viewer, or floating in the air."""
     low = text.lower()
     w = [x.lower().strip("'’") for x in words(text)]
-    if re.search(r"\b(you|your|you're|youre|yourself)\b", low):
+    if re.search(r"\b(you|your|you're|youre|yourself|sen|senin|sana|seni|siz|sizin|size|sizi|kendine|kendiniz)\b", low):
         return 100.0, "speaks to the viewer"
     if w and w[0] in IMPERATIVES:
         return 90.0, f"imperative opener (\"{w[0]}\")"
-    if re.search(r"\b(i|my|me|we|our)\b", low):
+    if re.search(r"\b(i|my|me|we|our|ben|benim|bana|beni|biz|bizim|bize|bizi)\b", low):
         return 70.0, "first person, no viewer named"
     return 35.0, "third person, nobody in the room"
 

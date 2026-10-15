@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Agent TR · İçerik, Kanca ve Büyüme Stüdyosu</title>
+  <meta name="description" content="Instagram içerik üreticileri için Türkçe kanca puanlayıcı, 125 karakter akış simülatörü, beat sheet zamanlayıcı ve 26 viral kanca kütüphanesi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(22, 24, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(30, 34, 50, 0.9);
+      --text: #f0f2f8;
+      --text-muted: #8e95ad;
+      --ig-gradient: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      --ig-purple: #833ab4;
+      --ig-pink: #e1306c;
+      --ig-orange: #fd1d1d;
+      --ig-yellow: #fcb045;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --accent: #6366f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(131, 58, 180, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(253, 29, 29, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
+    }
+
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      color: var(--ig-yellow);
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%, var(--ig-yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+
+    .attribution-bar {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .attribution-bar a {
+      color: var(--ig-pink);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .attribution-bar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      max-width: 1000px;
+      margin: 0 auto 2.5rem;
+      padding: 0.4rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: var(--ig-gradient);
+      box-shadow: 0 4px 15px rgba(225, 48, 108, 0.35);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card styling */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+    }
+
+    .card-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 850px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    textarea, input[type="text"], select {
+      width: 100%;
+      background: rgba(10, 12, 18, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    textarea:focus, input[type="text"]:focus, select:focus {
+      border-color: var(--ig-pink);
+      box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.2);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-action {
+      background: var(--ig-gradient);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-top: 1rem;
+      font-family: inherit;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(225, 48, 108, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Score meter */
+    .score-box {
+      background: rgba(12, 14, 22, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .score-circle {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(var(--success) 0%, rgba(255,255,255,0.05) 0%);
+      position: relative;
+      margin-bottom: 0.8rem;
+    }
+
+    .score-circle::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: #0d0f17;
+      border-radius: 50%;
+    }
+
+    .score-number {
+      position: relative;
+      z-index: 1;
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .score-status {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .checks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+
+    .check-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .check-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    .dealbreaker-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* Instagram Simulation Box */
+    .ig-feed-mockup {
+      background: #000;
+      border: 1px solid #262626;
+      border-radius: 14px;
+      padding: 1rem;
+      font-size: 0.88rem;
+      max-width: 420px;
+      margin: 0 auto;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+
+    .ig-user-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .ig-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--ig-gradient);
+    }
+
+    .ig-mock-handle {
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .ig-caption-view {
+      color: #f5f5f5;
+      line-height: 1.45;
+      word-break: break-word;
+      font-size: 0.85rem;
+    }
+
+    .ig-cut-text {
+      color: #a8a8a8;
+      cursor: pointer;
+    }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      margin-right: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Beat sheet display */
+    .beat-item {
+      display: grid;
+      grid-template-columns: 80px 70px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.88rem;
+      align-items: center;
+    }
+
+    .beat-time {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ig-yellow);
+      font-weight: 600;
+    }
+
+    .beat-dur {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .beat-flag {
+      color: var(--warning);
+      font-size: 0.78rem;
+      margin-top: 0.2rem;
+    }
+
+    /* 26 Hooks Catalog */
+    .search-bar {
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .hook-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .hook-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(225, 48, 108, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .hook-id {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ig-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .hook-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hook-example {
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      background: rgba(0,0,0,0.3);
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+      border-left: 3px solid var(--ig-orange);
+    }
+
+    .hook-onscreen {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ig-yellow);
+      margin-bottom: 0.4rem;
+    }
+
+    .hook-best {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--ig-pink);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #10b981;
+      color: #fff;
+      padding: 0.8rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 1000;
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">🚀 Instagram Agent Skill · Türkçe Web Stüdyosu</div>
+    <h1>Instagram İçerik & Büyüme Stüdyosu</h1>
+    <p class="subtitle">26 kanıtlanmış kanca formülü, akış simülatörü, beat sheet zamanlayıcı ve yapay zeka temizleyicisi tek bir pratik arayüzde.</p>
+    <div class="attribution-bar">
+      ✨ Orijinal Açık Kaynak Proje: <a href="https://github.com/Jakeschincariol/instagram-agent-skill" target="_blank">Jake Schincariol (MIT Lisanslı)</a> · Türkçe Sürüm: <strong>Asklepios0</strong>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav" id="tabsNav">
+      <button class="tab-btn active" data-tab="hook-tab">🎯 Kanca Puanlayıcı</button>
+      <button class="tab-btn" data-tab="caption-tab">📱 Akış & Açıklama (125 Karakter)</button>
+      <button class="tab-btn" data-tab="beats-tab">⏱️ Beat Sheet (Çekim Süresi)</button>
+      <button class="tab-btn" data-tab="library-tab">📚 26 Kanca Şablonu</button>
+      <button class="tab-btn" data-tab="profile-tab">👤 Profil Denetimi (100 Puan)</button>
+      <button class="tab-btn" data-tab="prompt-tab">🤖 AI Prompt Üretici</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- TAB 1: Kanca Puanlayıcı -->
+    <section id="hook-tab" class="tab-pane active">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">🎯 Video Kancasını (Hook) Test Et</h2>
+            <p class="card-desc">Videonun ilk 2 saniyesinde söyleyeceğin cümleyi yaz. Algoritma 5 kriterde puanlar.</p>
+          </div>
+          <label for="hookInput">İlk Cümle (Kanca):</label>
+          <textarea id="hookInput" placeholder="Örn: 18.000 TL, tek bir eksik sözleşme maddesinin bana maliyeti..."></textarea>
+          
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;">
+            <button class="btn-secondary" onclick="loadSampleHook(1)">Örnek 1 (Maliyet İtirafı)</button>
+            <button class="btn-secondary" onclick="loadSampleHook(2)">Örnek 2 (Zayıf Selamlama)</button>
+            <button class="btn-secondary" onclick="loadSampleHook(3)">Örnek 3 (Kimse Söylemiyor)</button>
+          </div>
+
+          <button class="btn-action" onclick="analyzeHook()">Kancayı Puanla & Test Et</button>
+
+          <div id="dealbreakerAlert" class="dealbreaker-banner">
+            ⚠️ <strong>ÖLÜMCÜL HATA (DEALBREAKER):</strong> <span id="dealbreakerMsg"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📊 Analiz ve Puan Tablosu</h2>
+            <p class="card-desc">70 puan üzeri GÜÇLÜ (STRONG), 50-70 ORTA, 50 altı ZAYIF (WEAK).</p>
+          </div>
+
+          <div class="score-box">
+            <div class="score-circle" id="scoreCircle">
+              <span class="score-number" id="hookScoreDisplay">--</span>
+            </div>
+            <div class="score-status" id="hookVerdictDisplay">HENÜZ TEST EDİLMEDİ</div>
+          </div>
+
+          <div class="checks-list">
+            <div class="check-row">
+              <span class="check-title">📏 Uzunluk (5-12 Kelime)</span>
+              <span class="check-val" id="lenScore">--</span>
+            </div>
+            <div class="check-row">
+              <span class="check-title">💎 Somutluk (Rakam, TL, İsim)</span>
+              <span class="check-val" id="specScore">--</span>
+            </div>
+            <div class="check-row">
+              <span class="check-title">⚡ Gerilim / Risk (Stakes)</span>
+              <span class="check-val" id="stakeScore">--</span>
+            </div>
+            <div class="check-row">
+              <span class="check-title">🎯 Başa Yerleşim (Frontload)</span>
+              <span class="check-val" id="frontScore">--</span>
+            </div>
+            <div class="check-row">
+              <span class="check-title">👤 İzleyiciye Hitap (Address)</span>
+              <span class="check-val" id="addrScore">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Caption & Akış Linter'ı -->
+    <section id="caption-tab" class="tab-pane">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">✍️ Açıklama (Caption) Linter'ı</h2>
+            <p class="card-desc">Instagram gönderi metnini yaz. Akışta nasıl kesileceğini ve güncel 5 hashtag kuralını gör.</p>
+          </div>
+
+          <label for="captionInput">Gönderi Açıklama Metni:</label>
+          <textarea id="captionInput" style="min-height: 180px;" placeholder="Gönderi açıklamasını buraya yapıştır..." oninput="analyzeCaption()"></textarea>
+
+          <div style="margin-top: 1rem;" class="checks-list">
+            <div class="check-row">
+              <span>Toplam Karakter:</span>
+              <span id="capChars" class="check-val">0 / 2200</span>
+            </div>
+            <div class="check-row">
+              <span>Hashtag Sayısı (Max 5 Kuralı):</span>
+              <span id="capTags" class="check-val">0</span>
+            </div>
+            <div class="check-row">
+              <span>Eyleme Çağrı (CTA / Ask):</span>
+              <span id="capAsk" class="check-val">Yok</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📱 Akışta Nasıl Görünecek?</h2>
+            <p class="card-desc">Kullanıcı akışta aşağı kaydırırken "...devamı"ndan önce sadece bu kutuyu görür:</p>
+          </div>
+
+          <div class="ig-feed-mockup">
+            <div class="ig-user-bar">
+              <div class="ig-avatar"></div>
+              <div class="ig-mock-handle">senin_hesabin</div>
+            </div>
+            <div class="ig-caption-view">
+              <span id="feedVisibleText">Metin girdikçe burada görünecek...</span>
+              <span class="ig-cut-text" id="feedCutTail"> ... devamı</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+            💡 <strong>Algoritma Kuralı:</strong> İnsanların %85'i "...devamı"na basmaz. Eğer kanca ve merak unsuru ilk 125 karakterde değilse açıklama okunmadan geçilir.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Beat Sheet -->
+    <section id="beats-tab" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">⏱️ Reel Beat Sheet (Konuşma & Çekim Zamanlayıcı)</h2>
+          <p class="card-desc">Reel senaryonu yapıştır. Dakikada 165 kelime hızına göre saniye saniye çekim planını ve 4 saniyeden uzun durgun yerleri gör.</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label for="scriptInput">Senaryo Metni (Her cümleyi ayrı satıra yaz):</label>
+            <textarea id="scriptInput" style="min-height: 200px;" placeholder="18.000 TL tek bir eksik sözleşme maddesinin bana maliyetidir.
+İşte bu yüzden her müşteriye aynı maddeyi şart koşuyorum.
+Teslimat onaylandığı gün ödeme yapılır.
+Onay bir his, teslimat ise takvimdir.
+İşte bu tek cümle bana tam 18.000 TL kazandırdı."></textarea>
+            
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
+              <div>
+                <label for="wpmRate">Konuşma Hızı (Kelime/Dk):</label>
+                <select id="wpmRate" style="width: auto;">
+                  <option value="150">150 (Sakin / Ağırbaşlı)</option>
+                  <option value="165" selected>165 (Normal Konuşma)</option>
+                  <option value="185">185 (Hızlı / Enerjik)</option>
+                </select>
+              </div>
+              <button class="btn-action" style="margin-top: 1.2rem;" onclick="generateBeatSheet()">Hesapla</button>
+            </div>
+          </div>
+
+          <div>
+            <label>Zamanlanmış Çekim Çizelgesi:</label>
+            <div id="beatsOutput" style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; min-height: 250px; overflow-y: auto;">
+              <p style="padding: 1.5rem; color: var(--text-muted); text-align: center;">Senaryonu girip 'Hesapla' butonuna bas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: 26 Hooks Library -->
+    <section id="library-tab" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📚 26 Kanıtlanmış Türkçe Kanca Formülü</h2>
+          <p class="card-desc">Kullanmak istediğin şablonu seç, tek tıkla kopyala ve kendi sektörüne uyarla.</p>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="hookSearch" placeholder="Formül ara (Örn: maliyet, rakam, kaza, hata, sır)..." oninput="filterHooks()">
+        </div>
+
+        <div class="hook-grid" id="hooksGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Profile Audit -->
+    <section id="profile-tab" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">👤 Profil 100 Puan Denetim Kontrol Listesi</h2>
+          <p class="card-desc">Instagram profilini 12 kritere göre incele, uyguladığın maddeleri işaretle ve puanını gör.</p>
+        </div>
+
+        <div class="grid-2">
+          <div id="profileRubricList">
+            <!-- Populated by JS -->
+          </div>
+
+          <div>
+            <div class="score-box" style="position: sticky; top: 2rem;">
+              <div class="score-circle" id="profCircle" style="width: 120px; height: 120px;">
+                <span class="score-number" id="profScoreDisplay" style="font-size: 2.2rem;">0</span>
+              </div>
+              <div class="score-status" id="profStatus">BAŞLANGIÇ</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                Çoğu hesap ilk incelemede 30-40 puanda kalır. İsim alanı (12p), Biyografi 1. satır (12p) ve Sabitlenen 3 gönderi (10p) en yüksek puana sahiptir.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: AI Prompt Wizard -->
+    <section id="prompt-tab" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">🤖 Claude & ChatGPT İçin Optimize Prompt Üretici</h2>
+          <p class="card-desc">Fikrini ve hedefini yaz, yapay zekaya vereceğin en kusursuz Türkçe promptu saniyeler içinde kopyala.</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label for="promptTopic">Reel veya İçerik Konusu:</label>
+            <input type="text" id="promptTopic" placeholder="Örn: Yazılıma yeni başlayanların yaptığı 3 hata">
+
+            <label for="promptNiche" style="margin-top: 1rem;">Hedef Kitle / Niş:</label>
+            <input type="text" id="promptNiche" placeholder="Örn: 20-30 yaş arası yazılımcı adayları">
+
+            <label for="promptCTA" style="margin-top: 1rem;">Eyleme Çağrı (CTA Kelimesi):</label>
+            <input type="text" id="promptCTA" placeholder="Örn: YOLHARİTASI">
+
+            <button class="btn-action" onclick="buildAIPrompt()">Promptu Oluştur</button>
+          </div>
+
+          <div>
+            <label>Yapay Zekaya Gönderilecek Hazır Prompt:</label>
+            <textarea id="promptOutput" style="min-height: 220px;" readonly placeholder="Prompt burada oluşacak..."></textarea>
+            <button class="btn-secondary" style="margin-top: 0.5rem;" onclick="copyPrompt()">📋 Panoya Kopyala</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">Kopyalandı!</div>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panes.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Toast notification
+    function showToast(msg = "Kopyalandı!") {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2200);
+    }
+
+    // 26 Hooks Database
+    const hooksData = [
+      { id: 1, name: "Maliyet / Hata İtirafı", template: "{Belirli bir miktar}, {tek bir hatanın} bana mâl olduğu bedeldir.", example: "18.000 TL, sözleşmedeki tek bir eksik cümlenin bana maliyeti.", on_screen: "18.000 TL'LİK HATA", best_for: "Hızlı güven oluşturma. Kendi hatasını anlatan insanları herkes sonuna kadar dinler." },
+      { id: 2, name: "Olumsuz Emir", template: "Her gün {yaygın eylemi} yapmayı bırakın. Bunun yerine {alternatifi} yapın.", example: "Günde 3 video paylaşmayı bırakın. İki günde bir paylaşın ve gelen her yoruma yanıt verin.", on_screen: "HER GÜN VİDEO ATMA", best_for: "Kaydetmeler ve yorumlar. Emir kipi çok daha fazla dikkat çeker." },
+      { id: 3, name: "Kimse Söylemiyor", template: "Kimse size {ulaşmak istedikleri şey hakkındaki rahatsız edici gerçeği} söylemiyor.", example: "Kimse size ilk 30 videonuzun batacağını söylemez.", on_screen: "İLK 30 VİDEON TUTMAYACAK", best_for: "Yeni kitle çekme. Kimsenin cesaret edip söylemediği gerçeği dile getirir." },
+      { id: 4, name: "Tasarruf / İkame", template: "Bu {şey}, {pahalı şeyin} yerini {şu fiyata} aldı.", example: "Bu 300 TL'lik araç, ayda 25.000 TL ödediğim editörün yerini aldı.", on_screen: "25.000 TL -> 300 TL", best_for: "Araç ve taktik tanıtımları. Aradaki fiyat uçurumu ilgiyi toplar." },
+      { id: 5, name: "Zaman Sıkıştırması", template: "Bunu yapmak eskiden {uzun süre} alırdı. Artık sadece {kısa süre} alıyor.", example: "Teklif hazırlamak eskiden 5 saatimi alırdı. Artık 20 dakikamı alıyor.", on_screen: "5 SAAT -> 20 DAKİKA", best_for: "Hız ve verimlilik videoları. Ekrandan bir bakışta okunur." },
+      { id: 6, name: "Kanıt / Rakam Masada", template: "{N gün boyunca} {şunu yaptım}. İşte gerçek sonuçlar ve rakamlar.", example: "60 gün boyunca her gün motor sürdüm; işte gerçek servis faturam.", on_screen: "60 GÜN. GERÇEK RAKAMLAR.", best_for: "Deneyler ve vaka analizleri. Gerçek ekran/fatura görüntüsüyle devleşir." },
+      { id: 7, name: "Yanlış Yol, Doğru Yol", template: "{Şu konuyu} yanlış yapıyorsunuz ve bu sizin suçunuz değil. {Çözüm}.", example: "Açıklamaları yanlış yazıyorsunuz ve bu sizin suçunuz değil. Instagram ilk satırdan sonrasını gizliyor.", on_screen: "AÇIKLAMALARIN GİZLENİYOR", best_for: "Eğitim videoları. 'Sizin suçunuz değil' savunmaya geçmeyi engeller." },
+      { id: 8, name: "İçeriden Sızdırma", template: "{Sektörde} {N yıl} geçirdim. İşte müşterilere asla söylemediğimiz şey.", example: "6 yıl boyunca ajans işlettim. İşte tekliflere asla yazmadığımız gerçek.", on_screen: "6 YILLIK İÇERİDEN BİLGİ", best_for: "Otorite kurma. Yılların gerçek olması şarttır." },
+      { id: 9, name: "Çal ve Kullan", template: "Bu {şablonu/sistemi} kendinize kopyalayın. Mükemmelleştirmem {şu kadar zaman} aldı.", example: "Bu 4 satırlık müşteri takip mesajını çalın. Doğru oturtmam 2 yılıma mal oldu.", on_screen: "BUNU ÇAL VE KULLAN", best_for: "Kaydetme ve arkadaşına gönderme sayılarını uçurur." },
+      { id: 10, name: "Eğer Bu Durumdaysan İzle", template: "Eğer {özel durum}, sonraki {kısa süre} bunu çözüyor.", example: "Eğer Reels videolarınız izleniyor ama takipçi getirmiyorsa, sonraki 30 saniye bunu çözüyor.", on_screen: "İZLENİYOR AMA TAKİPÇİ YOK MU?", best_for: "Hedef kitleyi filtreleme. Kalanlar gerçek müşteridir." },
+      { id: 11, name: "Favorili Liste", template: "{Sonucu getiren} {N} {şey}. {K.} sıradaki kimsenin yapmadığı yöntem.", example: "Kaydetmeleri ikiye katlayan 5 taktik. 4. sıradakini neredeyse kimse uygulamıyor.", on_screen: "5 TAKTİK. #4 EN İYİSİ.", best_for: "Videonun ortasında terk edilmeyi önleme." },
+      { id: 12, name: "İtiraza Meydan Okuma", template: "\"{Klasik itiraz}.\" Tamam. İşte yine de işe yarayan yöntemi.", example: "\"Kamera karşısına geçmek istemiyorum.\" Tamam. İşte yüzünü göstermeden satış yapmanın yolu.", on_screen: "\"KAMERADAN NEFRET EDİYORUM\"", best_for: "Daha önce 'hayır' demiş kitleyi ikna etme." },
+      { id: 13, name: "Öncesi ve Sonrası", template: "{Eski hali göster}. {Yeni hali göster}. {Değiştirdiğin tek bir şey}.", example: "Bu hesabımın Mart ayındaki haliydi. Bu da şimdiki hali. Sadece isim alanını değiştirdim.", on_screen: "MART / ŞİMDİ", best_for: "Görsel değişim videoları." },
+      { id: 14, name: "Hedef Kitleye Seslenme", template: "{Belirli grup}, görmezden geldiğiniz şey tam olarak bu.", example: "Seansı 2.000 TL'nin altında çalışan psikologlar: ertelediğiniz fiyatlandırma videosu bu.", on_screen: "SEANSI 2000 TL ALTI OLANLAR", best_for: "Birbirini etiketletme ve paylaşım patlaması." },
+      { id: 15, name: "İlk Başarısızlık Serisi", template: "İlk {N} {denemem} hiçbir işe yaramadı. {N+1.} denemede değişen şey şuydu.", example: "İlk 47 videom ortalama 300 izlendi. 48. video 400.000 yaptı.", on_screen: "47 BAŞARISIZ VİDEODAN SONRA", best_for: "Yolun başındaki kitle için umut ve yüksek yorum oranı." },
+      { id: 16, name: "Birebir Gelen Soru", template: "\"{Gelen sorunun aynısı}\" - Bu soruyu her hafta alıyorum.", example: "\"Sıkılmadan düzenli video nasıl atarım?\" Her hafta gelen soru bu.", on_screen: "HER HAFTA SORULAN SORU", best_for: "Instagram SEO aramalarıyla eşleşme." },
+      { id: 17, name: "Kafa Kafaya Karşılaştırma", template: "{A} karşısında {B}. İkisini de {şu kadar süre} denedim ve sonuç yakın bile değildi.", example: "Kaydırmalı postlar mı Reels mi? 90 gün ikisini de test ettim, fark inanılmazdı.", on_screen: "REELS vs POST", best_for: "Yorum savaşı başlatma." },
+      { id: 18, name: "Doğrudan Eylem / Demo", template: "{Harekete doğrudan başla.} Bak şimdi ne oluyor.", example: "Rakibimin açıklamasını bu araca yapıştırdığımda ne olduğuna bakın.", on_screen: "BAK ŞİMDİ NE OLUYOR", best_for: "Ekran kayıtları ve araç tanıtımları." },
+      { id: 19, name: "Son Tarih / Değişim", template: "{Şey} {şu tarihte} değişiyor. O zamana kadar {şunu} yapın.", example: "Instagram algoritması son güncellemede değişti. Yeni video atmadan önce bunu düzeltin.", on_screen: "YENİ VİDEO ATMADAN ÖNCE", best_for: "Gerçek aciliyet oluşturma." },
+      { id: 20, name: "İzin Verme / Yükten Kurtarma", template: "Herkesin söylediği {o şeye} ihtiyacınız yok.", example: "Bir nişe ihtiyacınız yok. Adını koyabileceğiniz tek bir gerçek kişiye ihtiyacınız var.", on_screen: "BUNA İHTİYACIN YOK", best_for: "Rahatlama hissi ve yüksek kaydetme." },
+      { id: 21, name: "Cümlenin Ortasından Başlama", template: "{...ve işte tam o anda {kırılma anı}.}", example: "...ve işte tam o anda müşteri parasını geri istedi. Hem de işi onayladıktan üç gün sonra.", on_screen: "PARAYI GERİ İSTEDİ", best_for: "Hikaye anlatımı." },
+      { id: 22, name: "Ters Köşe İnanç", template: "{Herkesin bildiği sözün tam tersi.}", example: "Çok çalışan değil, doğru çalışan kaybeder.", on_screen: "ÇOK ÇALIŞMAK YALAN", best_for: "Şaşırtma ve yorum çekme." },
+      { id: 23, name: "İstatiksel Şok", template: "{Grubun} %{N}'si {şaşırtıcı gerçek}.", example: "Yeni açılan işletmelerin %80'i ilk yılında aynı hata yüzünden batıyor.", on_screen: "%80'İ AYNI HATADAN BATIYOR", best_for: "Arkadaşa gönderme oranını artırma." },
+      { id: 24, name: "Yeni Şeyin İfşası", template: "İşte yeni çıkan {araç/özellik}.", example: "İşte Instagram'ın kimsenin fark etmediği o yeni gizli özelliği.", on_screen: "YENİ GİZLİ ÖZELLİK", best_for: "Teknoloji ve güncelleme videoları." },
+      { id: 25, name: "Başkasının Sonucu", template: "{Şu sürede} {şu sonucu} alan bir {kişi} vardı.", example: "Sıfır bütçeyle tek bir ayda 50.000 takipçiye ulaşan bir öğrencim vardı.", on_screen: "1 AYDA 50.000 TAKİPÇİ", best_for: "Kanıt ve vaka anlatımı." },
+      { id: 26, name: "En Üstün İfade / Süperlatif", template: "{Hedefe ulaşmanın} {en hızlı / tek} yolu {cevap}.", example: "Instagram'da güven kazanmanın en hızlı yolu, tartışılamayacak kanıtlar sunmaktır.", on_screen: "EN HIZLI YOL", best_for: "Tek iddialı ve net videolar." }
+    ];
+
+    // Populate Hooks Grid
+    const hooksGrid = document.getElementById('hooksGrid');
+    function renderHooks(list) {
+      hooksGrid.innerHTML = '';
+      list.forEach(h => {
+        const div = document.createElement('div');
+        div.className = 'hook-card';
+        div.innerHTML = `
+          <button class="copy-btn" onclick="copyHookText('${h.example}')">Kopyala</button>
+          <div class="hook-id">#${h.id} FORMÜL</div>
+          <div class="hook-name">${h.name}</div>
+          <div class="hook-example">"${h.example}"</div>
+          <div class="hook-onscreen">📺 Ekranda: ${h.on_screen}</div>
+          <div class="hook-best">🎯 En İyi: ${h.best_for}</div>
+        `;
+        hooksGrid.appendChild(div);
+      });
+    }
+    renderHooks(hooksData);
+
+    function filterHooks() {
+      const q = document.getElementById('hookSearch').value.toLowerCase();
+      const filtered = hooksData.filter(h => 
+        h.name.toLowerCase().includes(q) || 
+        h.example.toLowerCase().includes(q) || 
+        h.best_for.toLowerCase().includes(q)
+      );
+      renderHooks(filtered);
+    }
+
+    function copyHookText(text) {
+      navigator.clipboard.writeText(text);
+      showToast("Örnek kanca panoya kopyalandı!");
+    }
+
+    // Hook Scorer JS Heuristics
+    function loadSampleHook(type) {
+      const input = document.getElementById('hookInput');
+      if (type === 1) input.value = "18.000 TL, tek bir eksik sözleşme maddesinin bana maliyetidir.";
+      if (type === 2) input.value = "Selam arkadaşlar bugün sizlere Instagram'da nasıl büyünür onu anlatacağım.";
+      if (type === 3) input.value = "Kimse size ilk 1000 km'de kaza yapma ihtimalinizin %70 olduğunu söylemiyor.";
+      analyzeHook();
+    }
+
+    function analyzeHook() {
+      const text = document.getElementById('hookInput').value.trim();
+      if (!text) return;
+
+      const words = text.match(/[\w$%'’₺-]+/gu) || [];
+      const nWords = words.length;
+      const lower = text.toLowerCase();
+
+      // Dealbreakers
+      const dealAlert = document.getElementById('dealbreakerAlert');
+      const dealMsg = document.getElementById('dealbreakerMsg');
+      dealAlert.style.display = 'none';
+
+      if (/^(kaydırmayı durdur|kaydırma|geçme|dur|durun)/i.test(lower)) {
+        dealAlert.style.display = 'block';
+        dealMsg.textContent = "Açılışta 'kaydırmayı durdur' demek, dikkat çekmeyi hak etmediğinizin kanıtıdır.";
+      } else if (/^(selam|merhaba|herkese merhaba|selamlar|selam arkadaşlar)/i.test(lower)) {
+        dealAlert.style.display = 'block';
+        dealMsg.textContent = "Selamlama ile başlanmaz. Kimse Instagram akışına selam almak için girmez.";
+      } else if (/(bu videoda|bugünkü videoda|size göstereceğim|nasıl yapıldığını anlatacağım)/i.test(lower)) {
+        dealAlert.style.display = 'block';
+        dealMsg.textContent = "Giriş laf kalabalığı. Doğrudan sonuca ve kancaya girin.";
+      }
+
+      // 1. Length (5-12 words)
+      let lenScore = 100;
+      if (nWords < 5) lenScore = Math.max(0, 100 - (5 - nWords) * 20);
+      else if (nWords > 12) lenScore = Math.max(0, 100 - (nWords - 12) * 11);
+      if (text.length > 60) lenScore -= 12;
+
+      // 2. Specificity (numbers, currency, spoken numbers)
+      const hasNumber = /(\$|₺)\s?\d|\b\d+[\d,.]*\b|\b(sıfır|bir|iki|üç|dört|beş|on|yirmi|otuz|elli|yüz|bin|milyon|tl|lira|dolar)\b/i.test(lower);
+      const specScore = hasNumber ? 100 : 25;
+
+      // 3. Stakes (Risk, cost, negation)
+      const stakeWords = ["bırak", "bırakın", "asla", "yanlış", "hata", "kaybettim", "zarar", "maliyet", "batırdım", "iflas", "kimse", "yok", "değil", "iptal", "yasak", "yalan", "gerçek", "tehlike", "uyarı", "pişman", "sadece", "aslında"];
+      const hasStakes = stakeWords.some(w => lower.includes(w)) || hasNumber;
+      const stakeScore = hasStakes ? 85 : 20;
+
+      // 4. Frontload (Weak opener penalty)
+      const weakOpeners = ["selam", "merhaba", "arkadaşlar", "evet", "bugün", "aslında", "şey", "yani", "şimdi"];
+      const isWeak = weakOpeners.some(w => lower.startsWith(w));
+      const frontScore = isWeak ? 20 : 95;
+
+      // 5. Address (sen, siz, imperative)
+      const hasAddress = /\b(sen|senin|sana|seni|siz|sizin|size|sizi|kendine)\b/i.test(lower);
+      const isImperative = /^(bırak|bırakın|çal|kopyala|sil|dene|izle|oku|kaydet|kullan|kur|yap|yaz|sakın)/i.test(lower);
+      const addrScore = hasAddress ? 100 : (isImperative ? 90 : 65);
+
+      // Total Score
+      let total = Math.round((lenScore * 0.2) + (specScore * 0.25) + (stakeScore * 0.25) + (frontScore * 0.15) + (addrScore * 0.15));
+      if (dealAlert.style.display === 'block') total = Math.min(total, 35);
+
+      // UI Update
+      document.getElementById('hookScoreDisplay').textContent = total;
+      document.getElementById('lenScore').textContent = Math.round(lenScore) + ' / 100';
+      document.getElementById('specScore').textContent = Math.round(specScore) + ' / 100';
+      document.getElementById('stakeScore').textContent = Math.round(stakeScore) + ' / 100';
+      document.getElementById('frontScore').textContent = Math.round(frontScore) + ' / 100';
+      document.getElementById('addrScore').textContent = Math.round(addrScore) + ' / 100';
+
+      const circle = document.getElementById('scoreCircle');
+      const verdict = document.getElementById('hookVerdictDisplay');
+
+      circle.style.background = `conic-gradient(${total >= 70 ? 'var(--success)' : (total >= 50 ? 'var(--warning)' : 'var(--danger)')} ${total}%, rgba(255,255,255,0.05) ${total}%)`;
+
+      if (total >= 70) {
+        verdict.textContent = "GÜÇLÜ KANCA (STRONG)";
+        verdict.style.color = "var(--success)";
+      } else if (total >= 50) {
+        verdict.textContent = "ORTA (GELİŞTİRİLEBİLİR)";
+        verdict.style.color = "var(--warning)";
+      } else {
+        verdict.textContent = "ZAYIF KANCA (WEAK)";
+        verdict.style.color = "var(--danger)";
+      }
+    }
+
+    // Caption Linter
+    function analyzeCaption() {
+      const text = document.getElementById('captionInput').value;
+      const chars = text.length;
+      document.getElementById('capChars').textContent = `${chars} / 2200`;
+
+      // Hashtags
+      const tags = text.match(/#[A-Za-z0-9_çğıöşüÇĞİÖŞÜ]+/g) || [];
+      const tagEl = document.getElementById('capTags');
+      tagEl.textContent = `${tags.length} adet (${tags.length > 5 ? 'UYARI: 5 üzeri' : 'UYGUN'})`;
+      tagEl.style.color = tags.length > 5 ? 'var(--danger)' : (tags.length === 0 ? 'var(--warning)' : 'var(--success)');
+
+      // CTA check
+      const hasCTA = /(yoruma|yorumda|dm|mesaj|kaydet|paylaş|takip et|link bio|kaydır)/i.test(text);
+      const askEl = document.getElementById('capAsk');
+      askEl.textContent = hasCTA ? "Mevcut (Net Eylem Var)" : "Eksik (Bir CTA ekleyin)";
+      askEl.style.color = hasCTA ? "var(--success)" : "var(--warning)";
+
+      // 125 char cut simulation
+      const cut = 125;
+      const visible = text.slice(0, cut);
+      document.getElementById('feedVisibleText').textContent = visible || "Metin girdikçe burada görünecek...";
+      document.getElementById('feedCutTail').style.display = chars > cut ? "inline" : "none";
+    }
+
+    // Beat Sheet generator
+    function generateBeatSheet() {
+      const text = document.getElementById('scriptInput').value.trim();
+      if (!text) return;
+      const wpm = parseInt(document.getElementById('wpmRate').value) || 165;
+      const wps = wpm / 60;
+
+      const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      const out = document.getElementById('beatsOutput');
+      out.innerHTML = '';
+
+      let elapsed = 0;
+      lines.forEach((line, idx) => {
+        const words = line.match(/[\w$%'’₺-]+/gu) || [];
+        const nWords = words.length;
+        const dur = nWords / wps;
+        const startSec = elapsed;
+        elapsed += dur;
+
+        const m = Math.floor(startSec / 60);
+        const s = (startSec % 60).toFixed(1);
+        const timeCode = `${m}:${s < 10 ? '0' : ''}${s}`;
+
+        const isHook = idx === 0;
+        const isLongBeat = dur > 4.0;
+        const isHookTooLong = isHook && dur > 3.0;
+
+        const div = document.createElement('div');
+        div.className = 'beat-item';
+        div.innerHTML = `
+          <div class="beat-time">${timeCode}</div>
+          <div class="beat-dur">${dur.toFixed(1)}s</div>
+          <div>
+            <div>${isHook ? '<strong>[KANCA]</strong> ' : ''}${line}</div>
+            ${isHookTooLong ? '<div class="beat-flag">⚠️ Kanca 3 saniyeyi aşıyor! Kelime sayısını azalt.</div>' : ''}
+            ${!isHook && isLongBeat ? '<div class="beat-flag">⚠️ 4 saniyeden uzun durgun sahne. Araya kesme veya ekrana yazı ekle.</div>' : ''}
+          </div>
+        `;
+        out.appendChild(div);
+      });
+
+      const totalDiv = document.createElement('div');
+      totalDiv.style.padding = '1rem';
+      totalDiv.style.background = 'rgba(255,255,255,0.04)';
+      totalDiv.style.borderTop = '1px solid var(--card-border)';
+      totalDiv.innerHTML = `<strong>Toplam Tahmini Süre:</strong> ~${elapsed.toFixed(1)} saniye (${lines.length} sahne / cümle)`;
+      out.appendChild(totalDiv);
+    }
+
+    // Profile Rubric
+    const rubricItems = [
+      { id: "name", title: "İsim Alanı (Bold Yazı - 30 Karakter)", pts: 12, desc: "Sadece isim değil, aranabilir sektör anahtar kelimesi taşır ('Ramazan | Motosiklet İnceleme')." },
+      { id: "bio1", title: "Biyografi 1. Satır (Net Vaat)", pts: 12, desc: "Ziyaretçiye kim olduğunu ve takip ederse ne kazanacağını tek cümlede söyler." },
+      { id: "pinned", title: "Sabitlenen 3 Gönderi", pts: 10, desc: "3 kritik görevi (Tanışma/Otorite, En Büyük Karşılaştırma, En Çok Kaydedilen Rehber) paylaşır." },
+      { id: "bio_body", title: "Biyografi Gövdesi & Kanıt", pts: 8, desc: "Mail adresi yerine net bir kanıt veya değer önerisi bulunur." },
+      { id: "link", title: "Link Stratejisi (Tek Hedef)", pts: 8, desc: "Biyografideki vaatle birebir eşleşen tek bir net çıkış kapısı vardır." },
+      { id: "highlights", title: "Öne Çıkanlar (4-6 Kategori)", pts: 8, desc: "Takipçinin en çok merak ettiği soruları (Fiyat, Rotalar, Ekipman) düzenler." },
+      { id: "grid", title: "Izgara / Kapak Okunabilirliği", pts: 8, desc: "İlk 9 Reels kapağında büyük, kontrastlı ve merak uyandıran 3-4 kelimelik başlıklar vardır." },
+      { id: "photo", title: "Profil Fotoğrafı", pts: 6, desc: "Göz teması kuran veya net marka kimliği taşıyan yüksek kontrastlı çekim." },
+      { id: "handle", title: "Kullanıcı Adı (@handle)", pts: 6, desc: "Kısa, akılda kalıcı, Türkçe telaffuzu kolay." },
+      { id: "contact", title: "İletişim & Kategori Butonları", pts: 6, desc: "Profesyonel hesap aktif, e-posta butonu çalışıyor." },
+      { id: "recent", title: "Güncel Paylaşım Disiplini", pts: 10, desc: "Son 7 gün içinde paylaşım yapılmış ve gelen yorumlara yanıt verilmiş." },
+      { id: "story", title: "Günlük Hikaye Varlığı", pts: 6, desc: "Günlük aktif hikaye halkası mevcuttur." }
+    ];
+
+    const rubricList = document.getElementById('profileRubricList');
+    rubricItems.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'check-row';
+      row.style.marginBottom = '0.75rem';
+      row.innerHTML = `
+        <div style="flex: 1; padding-right: 1rem;">
+          <strong style="color: #fff; font-size: 0.95rem;">${item.title} (${item.pts} Puan)</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">${item.desc}</div>
+        </div>
+        <input type="checkbox" style="width: 20px; height: 20px; cursor: pointer;" onchange="calcProfileScore()" data-pts="${item.pts}">
+      `;
+      rubricList.appendChild(row);
+    });
+
+    function calcProfileScore() {
+      const cbs = document.querySelectorAll('#profileRubricList input[type="checkbox"]');
+      let score = 0;
+      cbs.forEach(cb => {
+        if (cb.checked) score += parseInt(cb.dataset.pts);
+      });
+
+      document.getElementById('profScoreDisplay').textContent = score;
+      const circle = document.getElementById('profCircle');
+      const status = document.getElementById('profStatus');
+
+      circle.style.background = `conic-gradient(${score >= 80 ? 'var(--success)' : (score >= 50 ? 'var(--warning)' : 'var(--danger)')} ${score}%, rgba(255,255,255,0.05) ${score}%)`;
+
+      if (score >= 85) {
+        status.textContent = "MÜKEMMEL DÖNÜŞÜM";
+        status.style.color = "var(--success)";
+      } else if (score >= 60) {
+        status.textContent = "İYİ SEVİYE";
+        status.style.color = "var(--warning)";
+      } else {
+        status.textContent = "GELİŞTİRİLMELİ";
+        status.style.color = "var(--danger)";
+      }
+    }
+
+    // Prompt Wizard
+    function buildAIPrompt() {
+      const topic = document.getElementById('promptTopic').value.trim() || "İçerik fikri";
+      const niche = document.getElementById('promptNiche').value.trim() || "Hedef kitle";
+      const cta = document.getElementById('promptCTA').value.trim() || "DETAY";
+
+      const prompt = `Sen uzman bir Instagram içerik stratejistisin.
+Aşağıdaki konu ve hedef kitle için 26 kanıtlanmış kanca formülünden 3 alternatif kanca ve saniyesine kadar zamanlanmış bir Reel senaryosu yaz.
+
+KONU: ${topic}
+HEDEF KİTLE: ${niche}
+CTA KELİMESİ: "${cta}"
+
+KURALLAR:
+1. İlk 2 saniyede asla "Selam arkadaşlar", "Bu videoda" gibi laf kalabalığı yapma. Doğrudan kancayla başla.
+2. 3 alternatif kanca üret (Biri #1 Maliyet İtirafı, biri #3 Kimse Söylemiyor, biri #2 Olumsuz Emir olsun) ve her kancanın ekran yazısını (on-screen text) 4 kelimeyi geçmeyecek şekilde ayrı yaz.
+3. Senaryoyu 165 kelime/dakika hızına göre maksimum 30 saniye olacak şekilde yaz. Her 3-4 saniyede bir kamera açısı veya sahne değişimi belirt.
+4. Sonunda bir kelimelik döngü (loop) bırak ki video başa sarıldığında akıcı olsun.
+5. Gönderi açıklamasını ilk 125 karakteri vurucu olacak şekilde yaz ve maksimum 5 odaklı hashtag ekle.`;
+
+      document.getElementById('promptOutput').value = prompt;
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('promptOutput').value;
+      if (!text) return;
+      navigator.clipboard.writeText(text);
+      showToast("Prompt panoya kopyalandı!");
+    }
+  </script>
+</body>
+</html>

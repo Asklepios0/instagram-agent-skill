@@ -33,8 +33,10 @@ import statistics
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-HOOKS = os.path.join(HERE, "..", "ig-reel", "hooks.json")
-WORD_RE = re.compile(r"[A-Za-z0-9$%'’-]+")
+HOOKS = os.path.join(HERE, "..", "ig-reel", "hooks_tr.json")
+if not os.path.exists(HOOKS):
+    HOOKS = os.path.join(HERE, "..", "ig-reel", "hooks.json")
+WORD_RE = re.compile(r"[\w$%'’₺-]+", re.UNICODE)
 
 try:                                              # optional: score the hooks too
     sys.path.insert(0, os.path.join(HERE, "..", "ig-reel"))

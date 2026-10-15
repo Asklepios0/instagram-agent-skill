@@ -1020,6 +1020,42 @@
       "regex": "(?i)\\b(?:follow for more|tag someone who|double tap if|share this if|comment below if)\\b",
       "name": "Reflex follow or tag bait",
       "fix": "Ask for the one action this post actually earns. The generic ask trains the audience to ignore every ask."
+    },
+    {
+      "id": "tr-dijital-dunya",
+      "regex": "(?i)\\b(?:dijital dünyada|günümüz dijital dünyasında|dijital çağda|çağımızda)\\b",
+      "name": "Türkçe yapay zeka klişesi ('dijital dünyada')",
+      "fix": "Bu cümleyi tamamen silin veya doğrudan konuya girin."
+    },
+    {
+      "id": "tr-unutmayin-ki",
+      "regex": "(?i)\\b(?:unutmayın ki|unutulmamalıdır ki)\\b",
+      "name": "Türkçe yapay zeka kalıbı ('Unutmayın ki')",
+      "fix": "Bu kalıbı silin, doğrudan söyleyeceğiniz cümleyi yazın."
+    },
+    {
+      "id": "tr-cigir-acan",
+      "regex": "(?i)\\b(?:çığır açan|çığır açıcı|devrim niteliğinde|ezber bozan)\\b",
+      "name": "Aşırı abartılı yapay zeka sıfatı ('çığır açan')",
+      "fix": "Sıfat yerine somut bir sonuç veya rakam verin."
+    },
+    {
+      "id": "tr-in-summary",
+      "regex": "(?i)^\\s*(?:özetle|sonuç olarak|özetlemek gerekirse)\\b",
+      "name": "Kompozisyon bitişi ('Özetle')",
+      "fix": "Sosyal medya gönderisinin sonuç paragrafına ihtiyacı yoktur."
+    },
+    {
+      "id": "tr-in-this-video",
+      "regex": "(?i)\\b(?:bu videoda|bugünkü videoda|size göstereceğim|nasıl yapıldığını anlatacağım)\\b",
+      "name": "Giriş laf kalabalığı ('Bu videoda size...')",
+      "fix": "Girişi silin ve ilk saniyeden doğrudan sonuca girin."
+    },
+    {
+      "id": "tr-stop-scroll",
+      "regex": "(?im)^\\s*(?:kaydırmayı durdur|kaydırma|videoyu geçme|dur dur)\\b",
+      "name": "'Kaydırmayı durdur' açılışı",
+      "fix": "Dikkat dilenmeyin, iddiayı kanca olarak verin."
     }
   ]
 }
